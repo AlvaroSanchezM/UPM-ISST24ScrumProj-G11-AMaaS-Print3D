@@ -8,11 +8,14 @@ public class UserInfoResponse {
     private String email;
     private List<String> roles;
 
-    public UserInfoResponse(Long id, String username, String email, List<String> roles) {
+    private String homeDirectory;
+
+    public UserInfoResponse(Long id, String username, String email, List<String> roles, String homeDirectory) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
+        this.homeDirectory = homeDirectory;
     }
 
     public Long getId() {
@@ -30,6 +33,12 @@ public class UserInfoResponse {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void setHomeDirectory(String homeDirectory){
+        this.homeDirectory = homeDirectory;
+    }
+
+    public String getHomeDirectory(){return homeDirectory;}
 
     public String getUsername() {
         return username;

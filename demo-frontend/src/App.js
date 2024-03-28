@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import Design from "./components/Design";
 
 // import AuthVerify from "./common/AuthVerify";
 import EventBus from "./common/EventBus";
@@ -77,8 +78,24 @@ const App = () => {
 
           {currentUser && (
             <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
+              <Link to={"/disena"} className="nav-link">
+                Diseña
+              </Link>
+            </li>
+          )}
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/misimpresoras"} className="nav-link">
+                Mis Impresoras
+              </Link>
+            </li>
+          )}
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/imprimir"} className="nav-link">
+                Imprimir
               </Link>
             </li>
           )}
@@ -121,9 +138,11 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
-          <Route path="/user" element={<BoardUser />} />
-          <Route path="/mod" element={<BoardModerator />} />
-          <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/disena" element={<Design />} />
+          <Route path="/misimpresoras" element={<BoardUser />} />
+          <Route path="/imprimir" element={<BoardUser />} />
+          <Route path="/mispedidos" element={<BoardUser />} />
+
         </Routes>
       </div>
 

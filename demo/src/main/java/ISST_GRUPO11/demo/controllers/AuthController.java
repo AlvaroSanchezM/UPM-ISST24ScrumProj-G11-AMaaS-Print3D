@@ -34,6 +34,8 @@ import ISST_GRUPO11.demo.repository.UserRepository;
 import ISST_GRUPO11.demo.security.jwt.JwtUtils;
 import ISST_GRUPO11.demo.security.services.UserDetailsImpl;
 
+//for Angular Client (withCredentials)
+//@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -73,7 +75,8 @@ public class AuthController {
                 .body(new UserInfoResponse(userDetails.getId(),
                         userDetails.getUsername(),
                         userDetails.getEmail(),
-                        roles));
+                        roles,
+                        userDetails.getHomeDirectory()));
     }
 
     @PostMapping("/signup")
@@ -89,7 +92,11 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getHomeDirectory());
+
+        // Set homeDirectory from SignupRequest
+
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -126,6 +133,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
 
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
