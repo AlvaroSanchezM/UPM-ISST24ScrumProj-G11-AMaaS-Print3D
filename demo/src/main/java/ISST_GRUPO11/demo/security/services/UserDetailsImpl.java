@@ -16,23 +16,21 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
     private String username;
-
     private String email;
-
     @JsonIgnore
     private String password;
-
     private Collection<? extends GrantedAuthority> authorities;
+    private String homeDirectory; // Added homeDirectory field
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
+                           Collection<? extends GrantedAuthority> authorities, String homeDirectory) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.homeDirectory = homeDirectory; // Initialize homeDirectory
     }
 
     public static UserDetailsImpl build(User user) {
@@ -45,7 +43,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities);
+                authorities,
+                user.getHomeDirectory()); // Pass homeDirectory to the constructor
     }
 
     @Override
@@ -69,6 +68,10 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getHomeDirectory() {
+        return homeDirectory;
     }
 
     @Override
@@ -98,6 +101,12 @@ public class UserDetailsImpl implements UserDetails {
         if (o == null || getClass() != o.getClass())
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) &&
+                Objects.equals(homeDirectory, user.homeDirectory); // Include homeDirectory in equals
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, homeDirectory); // Include homeDirectory in hashCode
     }
 }

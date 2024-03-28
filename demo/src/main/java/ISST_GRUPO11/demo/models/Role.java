@@ -1,6 +1,5 @@
 package ISST_GRUPO11.demo.models;
 
-import ISST_GRUPO11.demo.models.ERole;
 import jakarta.persistence.*;
 
 @Entity

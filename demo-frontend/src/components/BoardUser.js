@@ -3,27 +3,22 @@ import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
+
 const BoardUser = () => {
-  const [content, setContent] = useState("");
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
-    UserService.getUserBoard().then(
+    UserService.getPublicContent().then(
       (response) => {
-        setContent(response.data);
+        setUserDetails(response.data);
       },
       (error) => {
         const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+          (error.response && error.response.data) ||
           error.message ||
           error.toString();
 
-        setContent(_content);
-
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
-        }
+        setUserDetails({ error: _content });
       }
     );
   }, []);
@@ -31,7 +26,16 @@ const BoardUser = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
+        {userDetails.error ? (
+          <div>Error: {userDetails.error}</div>
+        ) : (
+          <div>
+            <h1>Welcome, {userDetails.username}!</h1>
+            <p>Email: {userDetails.email}</p>
+            {/* Render other user details as needed */}
+            {/* <p>Home Directory: {userDetails.homeDirectory}</p> */}
+          </div>
+        )}
       </header>
     </div>
   );

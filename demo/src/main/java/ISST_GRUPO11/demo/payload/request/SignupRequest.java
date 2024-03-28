@@ -20,6 +20,10 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
+    @NotBlank
+    @Size(max = 255) // Assuming a reasonable maximum length for a path
+    private String homeDirectory; // Added homeDirectory field
+
     public String getUsername() {
         return username;
     }
@@ -50,5 +54,13 @@ public class SignupRequest {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public String getHomeDirectory() {
+        return homeDirectory;
+    }
+
+    public void setHomeDirectory(String homeDirectory) {
+        this.homeDirectory = homeDirectory;
     }
 }

@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react";
-
-import UserService from "../services/user.service";
+import React from 'react';
+import './css/Home.css'; // Import your CSS file
 
 const Home = () => {
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
-  }, []);
-
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
+    <div className="home-container">
+      <header className="home-header">
+        <h1>Welcome to Our Application!</h1>
+        <p>Please sign in or sign up to continue.</p>
       </header>
     </div>
   );

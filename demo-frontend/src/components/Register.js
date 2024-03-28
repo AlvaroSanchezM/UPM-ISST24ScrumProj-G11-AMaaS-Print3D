@@ -46,6 +46,16 @@ const vpassword = (value) => {
   }
 };
 
+const vhomeDirectory = (value) => {
+  if (value.length < 6 || value.length > 40) {
+    return (
+      <div className="invalid-feedback d-block">
+        The homeDirectory must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
+
 const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
@@ -53,6 +63,7 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [homeDirectory, setHomeDirectory] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -71,6 +82,11 @@ const Register = (props) => {
     setPassword(password);
   };
 
+  const onChangeHomeDirectory = (e) => {
+    const homeDirectory = e.target.value;
+    setHomeDirectory(homeDirectory);
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -80,7 +96,7 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
+      AuthService.register(username, email, password, homeDirectory).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -145,6 +161,18 @@ const Register = (props) => {
                   value={password}
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="homeDirectory">homeDirectory</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="homeDirectory"
+                  value={homeDirectory}
+                  onChange={onChangeHomeDirectory}
+                  validations={[required, vhomeDirectory]}
                 />
               </div>
 
