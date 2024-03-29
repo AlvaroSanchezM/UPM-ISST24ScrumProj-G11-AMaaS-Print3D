@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/files")
@@ -41,5 +42,16 @@ public class FileUploadController {
         String username = authentication.getName(); // Get the username of the logged-in user
         List<FileUpload> uploads = fileUploadService.findFilesByUsername(username);
         return ResponseEntity.ok(uploads);
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<FileUpload> getFileUploadById(@PathVariable Long id) {
+        Optional<FileUpload> fileUpload = fileUploadService.getFileById(id);
+        if (fileUpload.isPresent()) {
+            return ResponseEntity.ok(fileUpload.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

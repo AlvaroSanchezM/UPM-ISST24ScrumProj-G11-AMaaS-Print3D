@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FileUploadService {
@@ -38,4 +39,8 @@ public class FileUploadService {
          // Get the username of the logged-in user
         return fileUploadRepository.findByUsername(username);
     }
+    public Optional<FileUpload> getFileById(Long id) {
+        return fileUploadRepository.findById(Math.toIntExact(id));
+    }
+
 }
