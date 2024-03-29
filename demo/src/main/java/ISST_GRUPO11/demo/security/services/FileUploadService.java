@@ -31,16 +31,30 @@ public class FileUploadService {
         fileUpload.setFileType(file.getContentType());
         fileUpload.setFileData(file.getBytes());
         fileUpload.setUsername(username); // Set the username
+        // Initially, the printer field is not set as no printer is assigned yet
+        // fileUpload.setPrinter(null); // This line is implicit and can be omitted
 
         return fileUploadRepository.save(fileUpload);
     }
 
     public List<FileUpload> findFilesByUsername(String username) {
-         // Get the username of the logged-in user
+        // Get the username of the logged-in user
         return fileUploadRepository.findByUsername(username);
     }
+
     public Optional<FileUpload> getFileById(Long id) {
         return fileUploadRepository.findById(Math.toIntExact(id));
     }
 
+    // Future method to assign a printer to a file upload
+    public FileUpload assignPrinterToFileUpload(Integer fileId, Integer printerId) {
+        Optional<FileUpload> fileUploadOpt = fileUploadRepository.findById(fileId);
+        if (fileUploadOpt.isPresent()) {
+            FileUpload fileUpload = fileUploadOpt.get();
+            fileUpload.setPrinter(printerId); // Assign the printer
+            return fileUploadRepository.save(fileUpload);
+        } else {
+            throw new RuntimeException("File upload not found with id: " + fileId);
+        }
+    }
 }

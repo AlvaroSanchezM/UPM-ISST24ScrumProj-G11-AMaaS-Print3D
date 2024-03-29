@@ -41,6 +41,8 @@ public class FileUpload {
     @Size(max = 255)
     private String username; // New field for storing the username
 
+    private Integer printer;
+
     // Constructors
     public FileUpload() {
     }
@@ -119,5 +121,13 @@ public class FileUpload {
 
     public void setFileType(String fileType) {
         this.fileType = fileType;
+    }
+
+    public Integer getPrinter() {
+        return printer;
+    }
+
+    public void setPrinter(Integer printer) {
+        this.printer = printer;
     }
 }

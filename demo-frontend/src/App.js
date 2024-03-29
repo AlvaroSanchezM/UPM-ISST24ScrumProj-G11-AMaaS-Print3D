@@ -19,6 +19,7 @@ import MisPedidos from "./components/MisPedidos";
 
 import EventBus from "./common/EventBus";
 import MisImpresoras from "./components/MisImpresoras";
+import Imprimir from "./components/Imprimir";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -144,7 +145,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/disena" element={<PrivateRoute><Design /></PrivateRoute>} />
           <Route path="/misimpresoras" element={<PrivateRoute><MisImpresoras /></PrivateRoute>} />
-          <Route path="/imprimir" element={<PrivateRoute><BoardUser /></PrivateRoute>} />
+          <Route path="/imprimir" element={<PrivateRoute><Imprimir /></PrivateRoute>} />
           <Route path="/mispedidos" element={<PrivateRoute><MisPedidos /></PrivateRoute>} />
           <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
 

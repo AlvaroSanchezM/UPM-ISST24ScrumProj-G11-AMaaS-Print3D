@@ -3,6 +3,8 @@ package ISST_GRUPO11.demo.controllers;
 import ISST_GRUPO11.demo.models.FileUpload;
 import ISST_GRUPO11.demo.security.services.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -39,7 +41,7 @@ public class FileUploadController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<FileUpload>> getMyFileUploads() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); // Get the username of the logged-in user
+        String username = authentication.getName();
         List<FileUpload> uploads = fileUploadService.findFilesByUsername(username);
         return ResponseEntity.ok(uploads);
     }
@@ -48,8 +50,30 @@ public class FileUploadController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FileUpload> getFileUploadById(@PathVariable Long id) {
         Optional<FileUpload> fileUpload = fileUploadService.getFileById(id);
-        if (fileUpload.isPresent()) {
-            return ResponseEntity.ok(fileUpload.get());
+        return fileUpload.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}/assignPrinter")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> assignPrinterToFileUpload(@PathVariable Long id, @RequestParam("printerId") Integer printerId) {
+        try {
+            FileUpload updatedFileUpload = fileUploadService.assignPrinterToFileUpload(Math.toIntExact(id), printerId);
+            return ResponseEntity.ok(updatedFileUpload);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error assigning printer to file upload: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/download/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long id) {
+        Optional<FileUpload> fileUploadOpt = fileUploadService.getFileById(id);
+        if (fileUploadOpt.isPresent()) {
+            FileUpload fileUpload = fileUploadOpt.get();
+            return ResponseEntity.ok()
+                    .contentType(org.springframework.http.MediaType.parseMediaType(fileUpload.getFileType()))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileUpload.getFileName() + "\"")
+                    .body(new ByteArrayResource(fileUpload.getFileData()));
         } else {
             return ResponseEntity.notFound().build();
         }
