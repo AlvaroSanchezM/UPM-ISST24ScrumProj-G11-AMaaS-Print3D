@@ -13,6 +13,9 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Design from "./components/Design";
+import PrivateRoute from "./components/PrivateRoute";
+import Payment from "./components/Payment";
+import MisPedidos from "./components/MisPedidos";
 
 import EventBus from "./common/EventBus";
 
@@ -138,17 +141,16 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/disena" element={<Design />} />
-          <Route path="/misimpresoras" element={<BoardUser />} />
-          <Route path="/imprimir" element={<BoardUser />} />
-          <Route path="/mispedidos" element={<BoardUser />} />
-          {/* Agregar rutas adicionales según sea necesario */}
-          <Route path="/mod" element={<BoardModerator />} />
-          <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/disena" element={<PrivateRoute><Design /></PrivateRoute>} />
+          <Route path="/misimpresoras" element={<PrivateRoute><BoardUser /></PrivateRoute>} />
+          <Route path="/imprimir" element={<PrivateRoute><BoardUser /></PrivateRoute>} />
+          <Route path="/mispedidos" element={<PrivateRoute><MisPedidos /></PrivateRoute>} />
+          <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
+
         </Routes>
       </div>
 
-      {/* <AuthVerify logOut={logOut}/> */}
+
     </div>
   );
 };
