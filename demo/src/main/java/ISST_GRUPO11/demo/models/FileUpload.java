@@ -37,20 +37,35 @@ public class FileUpload {
     @Size(max = 255)
     private String fileType;
 
+    @NotBlank
+    @Size(max = 255)
+    private String username; // New field for storing the username
+
+    private Integer printer;
+
     // Constructors
     public FileUpload() {
     }
 
-    public FileUpload(String name, String email, String address, byte[] fileData, String fileName, String fileType) {
+    public FileUpload(String name, String email, String address, byte[] fileData, String fileName, String fileType, String username) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.fileData = fileData;
         this.fileName = fileName;
         this.fileType = fileType;
+        this.username = username;
     }
 
     // Getters
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public Integer getId() {
         return id;
     }
@@ -106,5 +121,13 @@ public class FileUpload {
 
     public void setFileType(String fileType) {
         this.fileType = fileType;
+    }
+
+    public Integer getPrinter() {
+        return printer;
+    }
+
+    public void setPrinter(Integer printer) {
+        this.printer = printer;
     }
 }
