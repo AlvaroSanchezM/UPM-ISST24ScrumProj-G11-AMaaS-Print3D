@@ -3,10 +3,12 @@ import axios from 'axios';
 import { Button, Modal, Dropdown } from 'react-bootstrap';
 
 const Imprimir = () => {
-    const [orders, setOrders] = useState([]);
+    const [unassignedOrders, setUnassignedOrders] = useState([]);
+    const [assignedOrders, setAssignedOrders] = useState([]);
     const [printers, setPrinters] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [showDownloadButton, setShowDownloadButton] = useState(false);
 
     useEffect(() => {
         fetchOrders();
@@ -16,8 +18,9 @@ const Imprimir = () => {
     const fetchOrders = async () => {
         try {
             const response = await axios.get('/api/files/myuploads', { withCredentials: true });
-            const unassignedOrders = response.data.filter(order => !order.printer);
-            setOrders(unassignedOrders);
+            const allOrders = response.data;
+            setUnassignedOrders(allOrders.filter(order => !order.printer));
+            setAssignedOrders(allOrders.filter(order => order.printer));
         } catch (error) {
             console.error("Error fetching orders:", error);
         }
@@ -35,8 +38,8 @@ const Imprimir = () => {
     const handleAcceptOrder = async (printerId) => {
         try {
             await axios.put(`/api/files/${selectedOrder.id}/assignPrinter?printerId=${printerId}`, {}, { withCredentials: true });
-            setSelectedOrder({ ...selectedOrder, printer: printerId }); // Update locally to reflect the assigned printer
-            fetchOrders(); // Refresh orders to remove the accepted order from the list
+            setShowDownloadButton(true); // Show download button after assigning a printer
+            fetchOrders(); // Refresh orders to update the lists
         } catch (error) {
             console.error("Error accepting order:", error);
         }
@@ -48,7 +51,7 @@ const Imprimir = () => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `${selectedOrder.fileName}`); // Use the file name from the order details
+            link.setAttribute('download', `${selectedOrder.fileName}`); // Use the original file name
             document.body.appendChild(link);
             link.click();
         } catch (error) {
@@ -56,14 +59,32 @@ const Imprimir = () => {
         }
     };
 
+    const handleShowModal = (order) => {
+        setSelectedOrder(order);
+        setShowModal(true);
+        // Only show the download button in the modal for orders that have a printer assigned
+        setShowDownloadButton(!!order.printer);
+    };
+
     return (
         <div className="container mt-3">
             <h2>Imprimir Pedidos</h2>
-            {orders.map((order, index) => (
+            <h3>Unassigned Orders</h3>
+            {unassignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
                         <h5 className="card-title">Pedido {index + 1}</h5>
-                        <Button onClick={() => { setSelectedOrder(order); setShowModal(true); }}>More Info</Button>
+                        <Button onClick={() => handleShowModal(order)}>More Info</Button>
+                    </div>
+                </div>
+            ))}
+            <h3>Assigned Orders</h3>
+            {assignedOrders.map((order, index) => (
+                <div key={order.id} className="card mb-3">
+                    <div className="card-body">
+                        <h5 className="card-title">Pedido {index + 1} (Assigned)</h5>
+                        <Button variant="primary" onClick={() => handleDownloadFile(order.id)}>Download File</Button>
+                        <Button onClick={() => handleShowModal(order)}>More Info</Button>
                     </div>
                 </div>
             ))}
@@ -82,19 +103,21 @@ const Imprimir = () => {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Select Printer
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {printers.map(printer => (
-                                <Dropdown.Item key={printer.id} onClick={() => handleAcceptOrder(printer.id)}>
-                                    {printer.model}
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    {selectedOrder && selectedOrder.printer && (
+                    {selectedOrder && !selectedOrder.printer && (
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Select Printer
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {printers.map(printer => (
+                                    <Dropdown.Item key={printer.id} onClick={() => handleAcceptOrder(printer.id)}>
+                                        {printer.model}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    )}
+                    {showDownloadButton && (
                         <Button variant="primary" onClick={() => handleDownloadFile(selectedOrder.id)}>Download File</Button>
                     )}
                 </Modal.Footer>

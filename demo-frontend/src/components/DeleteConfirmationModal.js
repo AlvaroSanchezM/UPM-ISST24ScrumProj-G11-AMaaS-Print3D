@@ -1,14 +1,13 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const DeleteConfirmationModal = ({ show, handleClose, printerId, handleDelete, refreshPrinters }) => {
-    const onDelete = async () => {
-        await handleDelete(printerId);
-        refreshPrinters();
+const DeleteConfirmationModal = ({ show, handleClose, printerId, handleDelete }) => {
+    const onDelete = () => {
+        handleDelete(printerId);
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
                 <Modal.Title>Delete Printer</Modal.Title>
             </Modal.Header>

@@ -23,9 +23,24 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException)
             throws IOException, ServletException {
         logger.error("Unauthorized error: {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+
+        // Set the response status code
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+        // Create a map to hold the custom error details
+        Map<String, String> errorDetails = new HashMap<>();
+        errorDetails.put("error", "Acceso denegado");
+        errorDetails.put("message", "Las credenciales proporcionadas no son válidas.");
+
+        // Convert the error details map to JSON
+        String jsonErrorDetails = new ObjectMapper().writeValueAsString(errorDetails);
+
+        // Set the content type and write the JSON error details to the response
+        response.setContentType("application/json");
+        response.getWriter().write(jsonErrorDetails);
     }
 }
