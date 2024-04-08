@@ -55,7 +55,7 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/home"} className="navbar-brand">
-          bezKoder
+          Print3D
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
