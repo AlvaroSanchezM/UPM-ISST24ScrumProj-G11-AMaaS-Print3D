@@ -26,12 +26,14 @@ public class SecurityConfig {
             //.cors(cors -> {cors.disable();})
             //Fijamos las autorizaciones a cada ruta de mi sistema (de lo más general a lo más específico)
             .authorizeHttpRequests(auth -> {
+                //Para testeo UNICAMENTE, COMENTAR EN CUANTO FUNCIONE
+                auth.requestMatchers("/**").permitAll();
                 //Permiso para entrar en la consola H2
                 auth.requestMatchers("/h2/**").permitAll(); 
                 auth.requestMatchers("/").permitAll();
-                auth.requestMatchers("/alumnos").hasAnyRole("ALUM");
-                auth.requestMatchers("/profesores").hasAnyRole("PROF");
-                auth.requestMatchers("/todos").authenticated();
+                //auth.requestMatchers("/alumnos").hasAnyRole("ALUM");
+                //auth.requestMatchers("/profesores").hasAnyRole("PROF");
+                //auth.requestMatchers("/todos").authenticated();
             })
             //Indicamos que usamos el login por defecto (/login /logout)
             .formLogin(withDefaults());

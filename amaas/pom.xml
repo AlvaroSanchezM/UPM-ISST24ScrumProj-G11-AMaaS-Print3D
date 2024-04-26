@@ -17,9 +17,9 @@
 		<java.version>17</java.version>
 
 		<frontend-src-dir>${project.basedir}/src/main/ui</frontend-src-dir>
-		<node.version>v12.3.1</node.version>
-		<yarn.version>v1.16.0</yarn.version>
-		<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+		<node.version>v18.17.1</node.version>
+		<yarn.version>1.22.4</yarn.version>
+		<frontend-maven-plugin.version>1.14.2</frontend-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -88,14 +88,14 @@
 				</configuration>
 
 				<executions>
-					<execution>
+					<execution><!--NOW FAILED THIS BUT React App Works, so We'll work with this. YAY!!-->
 						<id>install-frontend-tools</id>
 						<goals>
 							<goal>install-node-and-yarn</goal>
 						</goals>
 					</execution>
 
-					<execution><!--	Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: yarn-install} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:yarn-install:generate-resources)
+					<execution><!--	THIS SOLVED, APPARENTLY Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: yarn-install} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:yarn-install:generate-resources)
 									org.eclipse.core.runtime.CoreException: Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: yarn-install}-->
 						<id>yarn-install</id>
 						<goals>
@@ -106,7 +106,7 @@
 						</configuration>
 					</execution>
 
-					<execution><!--	Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: build-frontend} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:build-frontend:prepare-package)
+					<execution><!--	THIS SOLVED TOO, APPARENTLYFailed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: build-frontend} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:build-frontend:prepare-package)
 									org.eclipse.core.runtime.CoreException: Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: build-frontend}-->
 						<id>build-frontend</id>
 						<goals>
