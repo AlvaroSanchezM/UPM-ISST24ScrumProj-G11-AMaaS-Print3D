@@ -95,7 +95,8 @@
 						</goals>
 					</execution>
 
-					<execution>
+					<execution><!--	Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: yarn-install} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:yarn-install:generate-resources)
+									org.eclipse.core.runtime.CoreException: Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: yarn-install}-->
 						<id>yarn-install</id>
 						<goals>
 							<goal>yarn</goal>
@@ -105,7 +106,8 @@
 						</configuration>
 					</execution>
 
-					<execution>
+					<execution><!--	Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: build-frontend} (com.github.eirslett:frontend-maven-plugin:1.7.6:yarn:build-frontend:prepare-package)
+									org.eclipse.core.runtime.CoreException: Failed to execute mojo com.github.eirslett:frontend-maven-plugin:1.7.6:yarn {execution: build-frontend}-->
 						<id>build-frontend</id>
 						<goals>
 							<goal>yarn</goal>
