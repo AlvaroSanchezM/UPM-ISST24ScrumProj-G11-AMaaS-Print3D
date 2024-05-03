@@ -58,8 +58,13 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        // Primero, busca al usuario por su correo electrónico
+        User user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new RuntimeException("Error: User not found."));
+
+        // Luego, autentica al usuario utilizando el nombre de usuario y la contraseña
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                .authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),
                         loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -72,9 +77,10 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
+        // Ahora, incluye el nombre de usuario en la respuesta
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getUsername(),
+                        userDetails.getUsername(), // Aquí se incluye el nombre de usuario
                         userDetails.getEmail(),
                         roles));
     }

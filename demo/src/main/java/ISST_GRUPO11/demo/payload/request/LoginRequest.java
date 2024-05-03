@@ -3,8 +3,11 @@ package ISST_GRUPO11.demo.payload.request;
 import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
-    @NotBlank
+
     private String username;
+
+    @NotBlank
+    private String email;
 
     @NotBlank
     private String password;
@@ -24,4 +27,13 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
