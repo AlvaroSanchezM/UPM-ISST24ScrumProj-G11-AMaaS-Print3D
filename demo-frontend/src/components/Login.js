@@ -72,7 +72,7 @@ const Login = () => {
     <div className="col-md-12">
       <div className="card card-container">
         <img
-          src= "../src/images/logo.jpeg"
+          src="/logoprint3D.jpeg"
           alt="profile-img"
           className="profile-img-card"
         />
