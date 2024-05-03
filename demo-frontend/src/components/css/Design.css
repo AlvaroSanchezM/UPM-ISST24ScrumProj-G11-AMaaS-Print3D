@@ -50,3 +50,8 @@
     color: #dc3545;
   }
   
+  body {
+    background-image: url('../../images/fondo.jpg');
+    background-size: cover; 
+    background-position: center; 
+}
