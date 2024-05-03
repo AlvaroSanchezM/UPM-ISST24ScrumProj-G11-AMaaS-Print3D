@@ -7,6 +7,9 @@ label {
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
+  background-color:rgba(255, 255, 255, 0.5);
+  border: 2px solid #fff; 
+  border-radius: 5px;
 }
 
 .card {
