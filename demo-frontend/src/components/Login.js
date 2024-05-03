@@ -5,7 +5,6 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
-import './css/Design.css';
 
 const required = (value) => {
   if (!value) {
@@ -73,8 +72,7 @@ const Login = () => {
     <div className="col-md-12">
       <div className="card card-container">
         <img
-          src="/logoprint3D.jpeg" 
-          //src="../images/logoprint3D.jpeg"  //C:\Users\Irina\Pictures\logoprint3D.jpeg
+          src="/logoprint3D.jpeg"
           alt="profile-img"
           className="profile-img-card"
         />
