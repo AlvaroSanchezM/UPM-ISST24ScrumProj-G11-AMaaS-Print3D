@@ -69,7 +69,7 @@ const Imprimir = () => {
     return (
         <div className="container mt-3">
             <h2>Imprimir Pedidos</h2>
-            <h3>Unassigned Orders</h3>
+            <h3>Pedidos sin asignar</h3>
             {unassignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
@@ -78,7 +78,7 @@ const Imprimir = () => {
                     </div>
                 </div>
             ))}
-            <h3>Assigned Orders</h3>
+            <h3>Pedidos asignados</h3>
             {assignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
@@ -90,14 +90,14 @@ const Imprimir = () => {
             ))}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Order Details</Modal.Title>
+                    <Modal.Title>Detalles del pedido</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
                         <>
                             <p>Name: {selectedOrder.name}</p>
                             <p>Email: {selectedOrder.email}</p>
-                            <p>Address: {selectedOrder.address}</p>
+                            <p>Dirección: {selectedOrder.address}</p>
                             {/* Display other order details as needed */}
                         </>
                     )}
@@ -106,7 +106,7 @@ const Imprimir = () => {
                     {selectedOrder && !selectedOrder.printer && (
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Select Printer
+                                Seleccionar Impresora
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {printers.map(printer => (
