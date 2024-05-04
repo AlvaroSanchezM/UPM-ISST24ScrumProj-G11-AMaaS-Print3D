@@ -1,24 +1,42 @@
 .mt-3 {
-    max-width: 800px;
-    margin: auto;
-    background-color: #ffffff; /* Fondo blanco */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  }
-  
-  .misimpresoras-header {
-    background-color: #007bff; /* Azul */
-    color: white;
-    padding: 15px;
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .misimpresoras-header h2 {
-    margin: 0;
-  }
-  
-  .misimpresoras-content {
-    padding: 20px;
-  }
-  
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Soften the shadow */
+}
+
+.misimpresoras-header {
+  background-color: #0056b3; /* A darker shade of blue for better contrast */
+  color: white;
+  padding: 20px 15px;
+  border-radius: 10px 10px 0 0;
+  text-align: center; /* Center align the header text */
+}
+
+.misimpresoras-header h2 {
+  color: white;
+  margin: 0; /* Remove margin for better alignment */
+}
+
+.misimpresoras-content {
+  padding: 20px;
+  text-align: left; /* Ensure content text is aligned to the left */
+}
+
+.card-square {
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.card-square:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.btn {
+  margin-top: 10px; /* Provide spacing above the buttons */
+}
+
+.Alert {
+  margin-top: 10px; /* Provide spacing above the alert for better visual separation */
+}
