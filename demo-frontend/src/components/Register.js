@@ -53,8 +53,14 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [pais, setPais] = useState("");
+  const [provincia, setProvincia] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [codigoPostal, setCodigoPostal] = useState("");
+  const [calle, setCalle] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -80,7 +86,8 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
+      const homeAddress = `${pais}, ${provincia}, ${ciudad}, ${codigoPostal}, ${calle}`;
+      AuthService.register(username, email, password, homeAddress).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -147,6 +154,66 @@ const Register = (props) => {
                   validations={[required, vpassword]}
                 />
               </div>
+
+              <div className="form-group">
+              <label htmlFor="pais">Pais</label>
+              <Input
+              type="text"
+              className="form-control"
+              name="pais"
+              value={pais}
+              onChange={(e) => setPais(e.target.value)}
+              validations={[required]}
+            />
+          </div>
+
+              <div className="form-group">
+              <label htmlFor="provincia">Provincia</label>
+             <Input
+              type="text"
+              className="form-control"
+              name="provincia"
+              value={provincia}
+              onChange={(e) => setProvincia(e.target.value)}
+              validations={[required]}
+            />
+          </div>
+          <div className="form-group">
+              <label htmlFor="ciudad">Ciudad</label>
+             <Input
+              type="text"
+              className="form-control"
+              name="ciudad"
+              value={ciudad}
+              onChange={(e) => setCiudad(e.target.value)}
+              validations={[required]}
+            />
+          </div>
+
+          <div className="form-group">
+              <label htmlFor="codigoPostal">Código Postal</label>
+             <Input
+              type="text"
+              className="form-control"
+              name="codigoPostal"
+              value={codigoPostal}
+              onChange={(e) => setCodigoPostal(e.target.value)}
+              validations={[required]}
+            />
+          </div>
+
+          <div className="form-group">
+              <label htmlFor="calle">Calle</label>
+             <Input
+              type="text"
+              className="form-control"
+              name="calle"
+              value={calle}
+              onChange={(e) => setCalle(e.target.value)}
+              validations={[required]}
+            />
+          </div>
+
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block">Sign Up</button>
