@@ -118,7 +118,7 @@ const Imprimir = () => {
                         </Dropdown>
                     )}
                     {showDownloadButton && (
-                        <Button variant="primary" onClick={() => handleDownloadFile(selectedOrder.id)}>Download File</Button>
+                        <Button variant="primary" onClick={() => handleDownloadFile(selectedOrder.id)}>Descargar archivo</Button>
                     )}
                 </Modal.Footer>
             </Modal>

@@ -39,7 +39,7 @@ export default function MisPedidos() {
                     <div key={index} className="card mb-3 card-mis-pedidos">
                         <div className="card-body">
                             <h5 className="card-title">Pedidos {index + 1}</h5>
-                            <button className="btn btn-primary" onClick={() => handleViewDetails(upload.id)}>More Info</button>
+                            <button className="btn btn-primary" onClick={() => handleViewDetails(upload.id)}>Más información</button>
                         </div>
                     </div>
                 ))

@@ -41,27 +41,27 @@ const EditPrinterModal = ({ show, handleClose, printerId, refreshPrinters }) => 
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Printer</Modal.Title>
+                <Modal.Title>Editar Impresora</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Model</Form.Label>
+                        <Form.Label>Modelo</Form.Label>
                         <Form.Control type="text" name="model" value={printerData.model} onChange={handleChange} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Specifications</Form.Label>
+                        <Form.Label>Especificaciones</Form.Label>
                         <Form.Control type="text" name="specifications" value={printerData.specifications} onChange={handleChange} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Materials</Form.Label>
+                        <Form.Label>Materiales</Form.Label>
                         <Form.Control type="text" name="materials" value={printerData.materials} onChange={handleChange} required />
                     </Form.Group>
-                    <Button variant="primary" type="submit">Save Changes</Button>
+                    <Button variant="primary" type="submit">Guardar Cambios</Button>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
             </Modal.Footer>
         </Modal>
     );

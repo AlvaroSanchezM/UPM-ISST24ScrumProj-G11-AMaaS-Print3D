@@ -31,10 +31,10 @@ const Payment = () => {
 
     return (
         <div className="container">
-            <h2>Payment Page</h2>
-            <button onClick={handlePaymentAndUpload}>Complete Payment and Upload</button>
-            {uploadStatus === 'success' && <p>File uploaded successfully!</p>}
-            {uploadStatus === 'error' && <p className="error">Error uploading file and data.</p>}
+            <h2>Página de Pagos</h2>
+            <button onClick={handlePaymentAndUpload}>Completar el pago</button>
+            {uploadStatus === 'success' && <p>Documento cargado con éxito!</p>}
+            {uploadStatus === 'error' && <p className="error">Error al subir el archivo</p>}
         </div>
     );
 };
