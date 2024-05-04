@@ -7,6 +7,12 @@ const AddPrinterModal = ({ show, handleClose, refreshPrinters }) => {
         model: '',
         specifications: '',
         materials: '',
+        maxWidth:'',
+        maxLength: '',
+        maxHeigth: '',
+        speed: '',
+        materialCost: '',
+        operationCost: ''
     });
 
     const handleChange = (e) => {
@@ -45,15 +51,15 @@ const AddPrinterModal = ({ show, handleClose, refreshPrinters }) => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Máximo ancho</Form.Label>
-                        <Form.Control type="number" name="max_width" required onChange={handleChange} />
+                        <Form.Control type="number" name="maxWidth" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Máximo largo</Form.Label>
-                        <Form.Control type="number" name="max_length" required onChange={handleChange} />
+                        <Form.Control type="number" name="maxLength" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Máximo alto</Form.Label>
-                        <Form.Control type="number" name="max_height" required onChange={handleChange} />
+                        <Form.Control type="number" name="maxHeight" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Velocidad</Form.Label>
@@ -61,11 +67,11 @@ const AddPrinterModal = ({ show, handleClose, refreshPrinters }) => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Coste del material</Form.Label>
-                        <Form.Control type="number" step="0.01" name="material_cost" required onChange={handleChange} />
+                        <Form.Control type="number" step="0.01" name="materialCost" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Coste de operación</Form.Label>
-                        <Form.Control type="number" step="0.01" name="operation_cost" required onChange={handleChange} />
+                        <Form.Control type="number" step="0.01" name="operationCost" required onChange={handleChange} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Añadir impresora
