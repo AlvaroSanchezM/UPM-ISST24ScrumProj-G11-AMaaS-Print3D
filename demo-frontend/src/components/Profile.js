@@ -8,11 +8,18 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <header className="profile-header">
-        <h3>{currentUser.username} Profile</h3>
+        <h3>{currentUser.username} </h3>
       </header>
       <div className="profile-info">
-        <p><strong>Id:</strong> {currentUser.id}</p>
+        
         <p><strong>Email:</strong> {currentUser.email}</p>
+        <p><strong>Pais:</strong></p>
+        <p><strong>Provincia:</strong></p>
+        <p><strong>Ciudad:</strong></p>
+        <p><strong>Codigo Postal:</strong></p>
+        <p><strong>Calle:</strong></p>
+
+
         <div>
           <strong>Authorities:</strong>
           <ul>
