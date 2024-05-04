@@ -1,0 +1,36 @@
+/* MisPedidos.css */
+.container-mis-pedidos {
+    background-color: white; /* Fondo blanco para la página */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra suave para los contenedores */
+}
+
+.card-mis-pedidos {
+    border: 1px solid #ccc; /* Borde sutil para cada tarjeta de pedido */
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: transform 0.2s; /* Efecto de transición para el hover */
+}
+
+.card-mis-pedidos:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    color: #333; /* Color oscuro para el título pero no tan fuerte como el negro puro */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Azul brillante para los botones */
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0050a0;
+}
