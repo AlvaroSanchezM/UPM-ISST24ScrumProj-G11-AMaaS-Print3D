@@ -1,0 +1,41 @@
+.profile-container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #f8f9fa; /* Fondo claro para suavizar */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  .profile-header {
+    background-color: #007bff; /* Azul que coincida con el botón */
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .profile-header h3 {
+    margin: 0;
+  }
+  
+  .profile-info {
+    padding: 20px;
+  }
+  
+  .profile-info p {
+    font-size: 16px; /* Tipografía más legible */
+    color: #333;
+  }
+  
+  .profile-info ul {
+    list-style: none; /* Más moderno sin puntos */
+    padding: 0;
+  }
+  
+  .profile-info li {
+    background-color: #e9ecef; /* Ligero fondo gris para los roles */
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
