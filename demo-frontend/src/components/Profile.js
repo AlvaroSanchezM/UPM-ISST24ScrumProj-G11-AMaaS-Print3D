@@ -13,11 +13,6 @@ const Profile = () => {
       <div className="profile-info">
         
         <p><strong>Email:</strong> {currentUser.email}</p>
-        <p><strong>Pais:</strong></p>
-        <p><strong>Provincia:</strong></p>
-        <p><strong>Ciudad:</strong></p>
-        <p><strong>Codigo Postal:</strong></p>
-        <p><strong>Calle:</strong></p>
 
 
         <div>
