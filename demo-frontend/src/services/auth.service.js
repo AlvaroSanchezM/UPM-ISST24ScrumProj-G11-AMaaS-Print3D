@@ -11,14 +11,14 @@ const register = (username, email, password, homeAddress) => {
   });
 };
 
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
     .post(API_URL + "signin", {
-      username,
+      email,
       password,
     })
     .then((response) => {
-      if (response.data.username) {
+      if (response.data.email) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 
