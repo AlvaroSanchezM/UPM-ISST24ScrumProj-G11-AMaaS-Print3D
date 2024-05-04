@@ -1,11 +1,24 @@
 .design-form-container {
+    background-color: #fff !important;
     max-width: 400px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc !important;
     border-radius: 5px;
   }
   
+  .design-header {
+    background-color: #0056b3; /* A darker shade of blue for better contrast */
+    color: white;
+    padding: 20px 15px;
+    border-radius: 10px 10px 0 0;
+    text-align: center; /* Center align the header text */
+  }
+
+  .design-header h2 {
+    color: white;
+    margin: 0; /* Remove margin for better alignment */
+  }
   .design-form-container form {
     display: flex;
     flex-direction: column;

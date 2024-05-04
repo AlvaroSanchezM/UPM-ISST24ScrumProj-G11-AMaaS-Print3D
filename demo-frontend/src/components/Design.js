@@ -24,6 +24,9 @@ const Design = () => {
 
     return (
         <div className="design-form-container">
+            <header className="design-header">
+            <h2>Inicia tu impresión 3D</h2>
+            </header>
             <form>
                 <label>Name:</label>
                 <input type="text" name="name" value={data.name} onChange={handleInputChange} />
