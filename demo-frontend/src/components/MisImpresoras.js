@@ -5,6 +5,7 @@ import PrinterModel from './PrinterModel';
 import AddPrinterModal from './AddPrinterModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import EditPrinterModal from './EditPrinterModal';
+import "./css/MisImpresoras.css"; 
 
 const MisImpresoras = () => {
     const [printers, setPrinters] = useState([]);
@@ -48,7 +49,9 @@ const MisImpresoras = () => {
         <Container className="mt-3">
             <Row>
                 <Col>
+                    <div className="misimpresoras-header" style={{ marginBottom: '10px' }}>
                     <h2>Mis Impresoras</h2>
+                    </div>
                     <Button onClick={() => setShowModal(true)}>Añadir nueva impresora</Button>
                 </Col>
             </Row>
