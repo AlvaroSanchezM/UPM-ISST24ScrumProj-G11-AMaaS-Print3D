@@ -50,27 +50,27 @@ const AddPrinterModal = ({ show, handleClose, refreshPrinters }) => {
                         <Form.Control type="text" name="materials" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Máximo ancho</Form.Label>
+                        <Form.Label>Máximo ancho (cm)</Form.Label>
                         <Form.Control type="number" name="maxWidth" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Máximo largo</Form.Label>
+                        <Form.Label>Máximo largo (cm)</Form.Label>
                         <Form.Control type="number" name="maxLength" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Máximo alto</Form.Label>
+                        <Form.Label>Máximo alto (cm)</Form.Label>
                         <Form.Control type="number" name="maxHeight" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Velocidad</Form.Label>
+                        <Form.Label>Velocidad (mm^3/hora)</Form.Label>
                         <Form.Control type="number" step="0.01" name="speed" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Coste del material</Form.Label>
+                        <Form.Label>Coste del material (€/cm^3)</Form.Label>
                         <Form.Control type="number" step="0.01" name="materialCost" required onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Coste de operación</Form.Label>
+                        <Form.Label>Coste de operación (€/hora)</Form.Label>
                         <Form.Control type="number" step="0.01" name="operationCost" required onChange={handleChange} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
