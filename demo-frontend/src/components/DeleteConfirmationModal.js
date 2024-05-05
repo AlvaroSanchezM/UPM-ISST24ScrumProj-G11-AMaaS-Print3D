@@ -9,12 +9,12 @@ const DeleteConfirmationModal = ({ show, handleClose, printerId, handleDelete })
     return (
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Printer</Modal.Title>
+                <Modal.Title>Borrar impresora</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Are you sure you want to delete this printer?</Modal.Body>
+            <Modal.Body>¿Estás seguro que deseas borrar esta impresora?</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-                <Button variant="danger" onClick={onDelete}>Delete</Button>
+                <Button variant="secondary" onClick={handleClose}>Cancelar</Button>
+                <Button variant="danger" onClick={onDelete}>Borrar</Button>
             </Modal.Footer>
         </Modal>
     );

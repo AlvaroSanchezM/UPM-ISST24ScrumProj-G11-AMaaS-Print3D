@@ -1,0 +1,51 @@
+.home-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-header {
+    margin-bottom: 40px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.feature {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Optional: Add a background color or image to the entire home container */
+.home-container {
+    background-color: #f9f9f9; /* Light grey background for better contrast */
+}
+
+/* Styling specific icons */
+.fa-drafting-compass {
+    color: #6f42c1; /* A custom purple for the design icon */
+}
+
+.fa-industry {
+    color: #007bff; /* A vibrant blue for the manufacture icon */
+}
+

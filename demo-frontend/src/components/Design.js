@@ -24,20 +24,23 @@ const Design = () => {
 
     return (
         <div className="design-form-container">
+            <header className="design-header">
+            <h2>Inicia tu impresión 3D</h2>
+            </header>
             <form>
-                <label>Name:</label>
+                <label>Nombre:</label>
                 <input type="text" name="name" value={data.name} onChange={handleInputChange} />
 
                 <label>Email:</label>
                 <input type="email" name="email" value={data.email} onChange={handleInputChange} />
 
-                <label>Address:</label>
+                <label>Dirección:</label>
                 <input type="text" name="address" value={data.address} onChange={handleInputChange} />
 
-                <label>File:</label>
+                <label>Archivo:</label>
                 <input type="file" onChange={handleFileChange} />
 
-                <button type="button" onClick={handlePayment}>Pay</button>
+                <button type="button" onClick={handlePayment}>Pagar</button>
             </form>
         </div>
     );

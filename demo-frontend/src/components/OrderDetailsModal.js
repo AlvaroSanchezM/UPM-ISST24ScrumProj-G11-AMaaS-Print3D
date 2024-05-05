@@ -5,14 +5,14 @@ const OrderDetailsModal = ({ show, handleClose, orderDetails }) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Order Details</Modal.Title>
+                <Modal.Title>Detalles del pedido</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {orderDetails ? (
                     <>
                         <p>Name: {orderDetails.name}</p>
                         <p>Email: {orderDetails.email}</p>
-                        <p>Address: {orderDetails.address}</p>
+                        <p>Dirección: {orderDetails.address}</p>
                         {/* Display other order details as needed */}
                     </>
                 ) : (
