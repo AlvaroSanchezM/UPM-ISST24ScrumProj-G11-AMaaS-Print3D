@@ -1,0 +1,22 @@
+
+
+.footer {
+  background-color: white; /* Fondo oscuro para un look profesional */
+  color: black;
+  text-align: center;
+  padding: 1px 20px; /* Reduce el padding para hacerlo más estrecho */
+  font-size: 15px; /* Tamaño de fuente más pequeño */
+  margin: 20px auto 0; /* Asegúrate de que no hay margen externo */
+  width: 100%; /* Controla el ancho para asegurarte de que ocupa el espacio deseado */
+  box-sizing: border-box; /* Asegura que el padding no expanda el elemento */
+}
+
+.footer a {
+  color: #ffffff;
+  text-decoration: none; /* Sin subrayado */
+  font-size: 12px; /* Tamaño de fuente más pequeño para los enlaces */
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
