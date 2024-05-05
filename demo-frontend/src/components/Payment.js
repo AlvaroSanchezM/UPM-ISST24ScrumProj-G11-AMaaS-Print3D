@@ -20,7 +20,7 @@ const Payment = () => {
         formData.append('address', data.address);
 
         try {
-            await axios.post('http://localhost:8080/api/files/upload', formData, {
+            await axios.post('http://localhost:8080/api/pedidos/upload', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             setUploadStatus('success');

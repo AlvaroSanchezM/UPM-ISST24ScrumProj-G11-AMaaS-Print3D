@@ -17,7 +17,7 @@ const Imprimir = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get('/api/files/myuploads', { withCredentials: true });
+            const response = await axios.get('/api/pedidos/myuploads', { withCredentials: true });
             const allOrders = response.data;
             setUnassignedOrders(allOrders.filter(order => !order.printer));
             setAssignedOrders(allOrders.filter(order => order.printer));
@@ -37,7 +37,7 @@ const Imprimir = () => {
 
     const handleAcceptOrder = async (printerId) => {
         try {
-            await axios.put(`/api/files/${selectedOrder.id}/assignPrinter?printerId=${printerId}`, {}, { withCredentials: true });
+            await axios.put(`/api/pedidos/${selectedOrder.id}/assignPrinter?printerId=${printerId}`, {}, { withCredentials: true });
             setShowDownloadButton(true); // Show download button after assigning a printer
             fetchOrders(); // Refresh orders to update the lists
         } catch (error) {
@@ -47,7 +47,7 @@ const Imprimir = () => {
 
     const handleDownloadFile = async (orderId) => {
         try {
-            const response = await axios.get(`/api/files/download/${orderId}`, { responseType: 'blob', withCredentials: true });
+            const response = await axios.get(`/api/pedidos/download/${orderId}`, { responseType: 'blob', withCredentials: true });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;

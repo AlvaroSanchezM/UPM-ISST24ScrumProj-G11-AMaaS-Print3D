@@ -11,7 +11,7 @@ export default function MisPedidos() {
     useEffect(() => {
         const fetchUploads = async () => {
             try {
-                const response = await axios.get('/api/files/myuploads', { withCredentials: true });
+                const response = await axios.get('/api/pedidos/myuploads', { withCredentials: true });
                 setUploads(response.data);
             } catch (error) {
                 console.error("Error fetching uploads:", error);
@@ -23,7 +23,7 @@ export default function MisPedidos() {
 
     const handleViewDetails = async (orderId) => {
         try {
-            const response = await axios.get(`/api/files/${orderId}`, { withCredentials: true });
+            const response = await axios.get(`/api/pedidos/${orderId}`, { withCredentials: true });
             setSelectedOrderDetails(response.data);
             setShowDetailsModal(true);
         } catch (error) {
