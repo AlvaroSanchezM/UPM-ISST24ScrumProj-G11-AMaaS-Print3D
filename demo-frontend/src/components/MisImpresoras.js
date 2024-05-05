@@ -41,7 +41,7 @@ const MisImpresoras = () => {
     };
 
     return (
-        <Container className="mt-3">
+        <Container className="mt-7">
             <Row>
                 <Col>
                     <div className="misimpresoras-header">
@@ -51,7 +51,7 @@ const MisImpresoras = () => {
                 </Col>
             </Row>
             {error && (
-                <Alert variant="danger" className="mt-3">{error}</Alert>
+                <Alert variant="danger" className="mt-7">{error}</Alert>
             )}
             <Row xs={1} md={2} className="g-4">
                 {printers.map((printer) => (
