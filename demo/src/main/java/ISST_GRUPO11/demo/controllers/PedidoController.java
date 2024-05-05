@@ -24,7 +24,7 @@ public class PedidoController {
 
     @PostMapping("/upload")
     @PreAuthorize("isAuthenticated()")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<String> uploadPedido(@RequestParam("file") MultipartFile file,
             @RequestParam("material") String material,
             @RequestParam("colorYAcabado") String colorYAcabado,
@@ -47,6 +47,7 @@ public class PedidoController {
 
     @GetMapping("/myuploads")
     @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<List<Pedido>> getMyPedidos() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -56,6 +57,7 @@ public class PedidoController {
 
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<Pedido> getPedidoById(@PathVariable Integer id) {
         Optional<Pedido> pedido = pedidoService.getPedidoById(id);
         return pedido.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -63,6 +65,7 @@ public class PedidoController {
 
     @PutMapping("/{id}/update")
     @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<?> updatePedido(@PathVariable Integer id, @RequestBody Pedido pedidoDetails) {
         try {
             Pedido updatedPedido = pedidoService.updatePedido(id, pedidoDetails);
@@ -72,16 +75,27 @@ public class PedidoController {
         }
     }
 
+    @PutMapping("/{id}/assignPrinter")
+    @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    public ResponseEntity<?> assignOrderToPrinter(@PathVariable Integer id,
+            @RequestParam("printerId") Integer printerId) {
+        try {
+            pedidoService.assignOrderToPrinter(id, printerId);
+            return ResponseEntity.ok("Pedido asignado con éxito");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error asignando el pedido: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/download/{id}")
     @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Integer id) {
         Optional<Pedido> pedidoOpt = pedidoService.getPedidoById(id);
         if (pedidoOpt.isPresent()) {
             Pedido pedido = pedidoOpt.get();
-            // Utiliza el tipo de archivo almacenado en el pedido para determinar el
-            // Content-Type
             String contentType = pedido.getFileType();
-            // Asegúrate de que el nombre del archivo sea adecuado para el tipo de archivo
             String filename = "pedido_" + pedido.getId() + "." + getFileExtension(contentType);
             return ResponseEntity.ok()
                     .contentType(org.springframework.http.MediaType.parseMediaType(contentType))
@@ -93,6 +107,8 @@ public class PedidoController {
     }
 
     @GetMapping("/maxPagoId")
+    @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<Integer> getMaxPagoId() {
         Integer maxPagoId = pedidoService.getMaxPagoId();
         return ResponseEntity.ok(maxPagoId);

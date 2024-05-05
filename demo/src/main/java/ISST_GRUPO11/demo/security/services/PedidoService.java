@@ -67,4 +67,9 @@ public class PedidoService {
     public Integer getMaxPagoId() {
         return pedidoRepository.findMaxPagoId();
     }
+
+    public void assignOrderToPrinter(Integer id, Integer printerId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignOrderToPrinter'");
+    }
 }

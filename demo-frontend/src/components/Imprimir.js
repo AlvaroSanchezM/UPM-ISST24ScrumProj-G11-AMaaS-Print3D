@@ -17,7 +17,7 @@ const Imprimir = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get('/api/files/myuploads', { withCredentials: true });
+            const response = await axios.get('/api/pedidos/myprinters/orders');
             const allOrders = response.data;
             setUnassignedOrders(allOrders.filter(order => !order.printer));
             setAssignedOrders(allOrders.filter(order => order.printer));
@@ -37,7 +37,7 @@ const Imprimir = () => {
 
     const handleAcceptOrder = async (printerId) => {
         try {
-            await axios.put(`/api/files/${selectedOrder.id}/assignPrinter?printerId=${printerId}`, {}, { withCredentials: true });
+            await axios.put(`/api/pedidos/${selectedOrder.id}/assignPrinter?printerId=${printerId}`, {}, { withCredentials: true });
             setShowDownloadButton(true); // Show download button after assigning a printer
             fetchOrders(); // Refresh orders to update the lists
         } catch (error) {
@@ -47,11 +47,11 @@ const Imprimir = () => {
 
     const handleDownloadFile = async (orderId) => {
         try {
-            const response = await axios.get(`/api/files/download/${orderId}`, { responseType: 'blob', withCredentials: true });
+            const response = await axios.get(`/api/pedidos/download/${orderId}`, { responseType: 'blob', withCredentials: true });
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `${selectedOrder.fileName}`); // Use the original file name
+            link.setAttribute('download', `pedido_${orderId}.${selectedOrder.fileType}`); // Use the original file name
             document.body.appendChild(link);
             link.click();
         } catch (error) {
@@ -74,7 +74,7 @@ const Imprimir = () => {
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
                         <h5 className="card-title">Pedido {index + 1}</h5>
-                        <Button onClick={() => handleShowModal(order)}>More Info</Button>
+                        <Button onClick={() => handleShowModal(order)}>Más Info</Button>
                     </div>
                 </div>
             ))}
@@ -82,9 +82,9 @@ const Imprimir = () => {
             {assignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
-                        <h5 className="card-title">Pedido {index + 1} (Assigned)</h5>
-                        <Button variant="primary" onClick={() => handleDownloadFile(order.id)}>Download File</Button>
-                        <Button onClick={() => handleShowModal(order)}>More Info</Button>
+                        <h5 className="card-title">Pedido {index + 1} (Asignado)</h5>
+                        <Button variant="primary" onClick={() => handleDownloadFile(order.id)}>Descargar Archivo</Button>
+                        <Button onClick={() => handleShowModal(order)}>Más Info</Button>
                     </div>
                 </div>
             ))}
@@ -95,9 +95,14 @@ const Imprimir = () => {
                 <Modal.Body>
                     {selectedOrder && (
                         <>
-                            <p>Name: {selectedOrder.name}</p>
-                            <p>Email: {selectedOrder.email}</p>
-                            <p>Dirección: {selectedOrder.address}</p>
+                            <p>Material: {selectedOrder.material}</p>
+                            <p>Color y Acabado: {selectedOrder.colorYAcabado}</p>
+                            <p>Escala: {selectedOrder.escala}</p>
+                            <p>Cantidad: {selectedOrder.cantidad}</p>
+                            <p>Aceptado por: {selectedOrder.aceptadoPor}</p>
+                            <p>Pedido por: {selectedOrder.pedidoPor}</p>
+                            <p>Pago ID: {selectedOrder.pagoId}</p>
+                            <p>Tipo de archivo: {selectedOrder.fileType}</p>
                             {/* Display other order details as needed */}
                         </>
                     )}
