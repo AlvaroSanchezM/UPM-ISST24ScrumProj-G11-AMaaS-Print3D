@@ -13,8 +13,8 @@ public class Printer {
     @Column(name = "printer_id")
     private Long id;
 
-    @Column(name = "image", columnDefinition = "TEXT")
-    private String image; // Almacenar como Base64
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @NotBlank
     @Size(max = 50)
@@ -74,7 +74,7 @@ public class Printer {
 
     // Constructor completo
     public Printer(String propietary, String model, String specifications, String materials, String username,
-            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, String image,
+            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, String imageUrl,
             Double operationCost, Boolean verification, Double latitude, Double longitude) {
         this.propietary = propietary;
         this.model = model;
@@ -85,7 +85,7 @@ public class Printer {
         this.maxLength = maxLength;
         this.maxHeight = maxHeight;
         this.speed = speed;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.materialCost = materialCost;
         this.operationCost = operationCost;
         this.verification = verification;
@@ -102,12 +102,12 @@ public class Printer {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getPropietary() {

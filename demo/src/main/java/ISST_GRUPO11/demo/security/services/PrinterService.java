@@ -1,9 +1,10 @@
 package ISST_GRUPO11.demo.security.services;
 
-import ISST_GRUPO11.demo.models.Printer;
-import ISST_GRUPO11.demo.repository.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ISST_GRUPO11.demo.models.Printer;
+import ISST_GRUPO11.demo.repository.PrinterRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,14 +26,27 @@ public class PrinterService {
         printerRepository.deleteById(id);
     }
 
-    public Printer updatePrinter(Long id, Printer printerDetails) {
-        Printer printer = printerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Printer not found with id " + id));
-        printer.setModel(printerDetails.getModel());
-        printer.setSpecifications(printerDetails.getSpecifications());
-        printer.setMaterials(printerDetails.getMaterials());
-        // Update other fields as necessary
-        return printerRepository.save(printer);
+    public Printer updatePrinter(Printer printer) {
+        Printer existingPrinter = printerRepository.findById(printer.getId())
+                .orElseThrow(() -> new RuntimeException("Printer not found with id " + printer.getId()));
+
+        // Actualizar todos los campos relevantes
+        existingPrinter.setModel(printer.getModel());
+        existingPrinter.setSpecifications(printer.getSpecifications());
+        existingPrinter.setMaterials(printer.getMaterials());
+        existingPrinter.setMaxWidth(printer.getMaxWidth());
+        existingPrinter.setMaxLength(printer.getMaxLength());
+        existingPrinter.setMaxHeight(printer.getMaxHeight());
+        existingPrinter.setSpeed(printer.getSpeed());
+        existingPrinter.setMaterialCost(printer.getMaterialCost());
+        existingPrinter.setOperationCost(printer.getOperationCost());
+        existingPrinter.setLatitude(printer.getLatitude());
+        existingPrinter.setLongitude(printer.getLongitude());
+        existingPrinter.setVerification(printer.getVerification());
+        existingPrinter.setImageUrl(printer.getImageUrl()); // Asegúrate de actualizar la URL de la imagen si es
+                                                            // necesario
+
+        return printerRepository.save(existingPrinter);
     }
 
     public Optional<Printer> findPrinterById(Long id) {

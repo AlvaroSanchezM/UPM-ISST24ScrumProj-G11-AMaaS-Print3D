@@ -5,7 +5,7 @@ import PrinterModel from './PrinterModel';
 import AddPrinterModal from './AddPrinterModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import EditPrinterModal from './EditPrinterModal';
-import "./css/MisImpresoras.css"; 
+import "./css/MisImpresoras.css"; // Asegúrate de que los estilos están bien definidos aquí
 
 const MisImpresoras = () => {
     const [printers, setPrinters] = useState([]);
@@ -30,18 +30,13 @@ const MisImpresoras = () => {
     };
 
     const handleDelete = async (printerId) => {
-        if (printerId) {
-            try {
-                await axios.delete(`/api/printers/${printerId}`, { withCredentials: true });
-                setShowDeleteModal(false);
-                fetchPrinters();
-            } catch (error) {
-                console.error("Error deleting printer:", error);
-                setError('Error deleting printer. Please try again later.');
-            }
-        } else {
-            console.error("Printer ID is undefined.");
-            setError('Error: Printer ID is undefined.');
+        try {
+            await axios.delete(`/api/printers/${printerId}`, { withCredentials: true });
+            setShowDeleteModal(false);
+            fetchPrinters(); // Refresh the list after deletion
+        } catch (error) {
+            console.error("Error deleting printer:", error);
+            setError('Error deleting printer. Please try again later.');
         }
     };
 
@@ -49,18 +44,14 @@ const MisImpresoras = () => {
         <Container className="mt-3">
             <Row>
                 <Col>
-                    <div className="misimpresoras-header" style={{ marginBottom: '10px' }}>
-                    <h2>Mis Impresoras</h2>
+                    <div className="misimpresoras-header">
+                        <h2>Mis Impresoras</h2>
+                        <Button onClick={() => setShowModal(true)} className="add-button">Añadir nueva impresora</Button>
                     </div>
-                    <Button onClick={() => setShowModal(true)}>Añadir nueva impresora</Button>
                 </Col>
             </Row>
             {error && (
-                <Row>
-                    <Col>
-                        <Alert variant="danger" className="mt-3">{error}</Alert>
-                    </Col>
-                </Row>
+                <Alert variant="danger" className="mt-3">{error}</Alert>
             )}
             <Row xs={1} md={2} className="g-4">
                 {printers.map((printer) => (
@@ -68,8 +59,8 @@ const MisImpresoras = () => {
                         <Card className="card-square">
                             <Card.Body>
                                 <PrinterModel printer={printer} />
-                                <div className="mt-2 d-flex justify-content-end">
-                                    <Button variant="info" className="me-2" onClick={() => { setSelectedPrinterId(printer.id); setShowEditModal(true); }}>Editar</Button>
+                                <div className="button-group">
+                                    <Button variant="info" onClick={() => { setSelectedPrinterId(printer.id); setShowEditModal(true); }}>Editar</Button>
                                     <Button variant="danger" onClick={() => { setSelectedPrinterId(printer.id); setShowDeleteModal(true); }}>Eliminar</Button>
                                 </div>
                             </Card.Body>
@@ -78,18 +69,8 @@ const MisImpresoras = () => {
                 ))}
             </Row>
             <AddPrinterModal show={showModal} handleClose={() => setShowModal(false)} refreshPrinters={fetchPrinters} />
-            <DeleteConfirmationModal
-                show={showDeleteModal}
-                handleClose={() => setShowDeleteModal(false)}
-                printerId={selectedPrinterId}
-                handleDelete={handleDelete}
-            />
-            <EditPrinterModal
-                show={showEditModal}
-                handleClose={() => setShowEditModal(false)}
-                printerId={selectedPrinterId}
-                refreshPrinters={fetchPrinters}
-            />
+            <DeleteConfirmationModal show={showDeleteModal} handleClose={() => setShowDeleteModal(false)} handleDelete={() => handleDelete(selectedPrinterId)} />
+            <EditPrinterModal show={showEditModal} handleClose={() => setShowEditModal(false)} printerId={selectedPrinterId} refreshPrinters={fetchPrinters} />
         </Container>
     );
 };

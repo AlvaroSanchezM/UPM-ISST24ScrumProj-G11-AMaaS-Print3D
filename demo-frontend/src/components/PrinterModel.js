@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './css/PrinterModel.css'; // Asumiendo que los estilos están definidos en este archivo CSS
 
 const PrinterModel = ({ printer }) => {
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
-        const fetchImage = async () => {
+        const fetchImageUrl = async () => {
             try {
-                // Asegúrate de que estás usando printer.id para obtener la imagen
-                const response = await axios.get(`/api/printers/${printer.id}/image`);
-                console.log(response.data); // Verificar la cadena Base64 en la consola
-                setImageUrl(`data:image/jpeg;base64,${response.data}`);
+                const response = await axios.get(`/api/printers/${printer.id}/image-url`);
+                setImageUrl(response.data);
             } catch (error) {
-                console.error('Error fetching image', error);
+                console.error('Error fetching image URL', error);
+                setImageUrl(''); // Puedes poner aquí una URL de imagen de error si lo prefieres
             }
         };
 
         if (printer && printer.id) {
-            fetchImage();
+            fetchImageUrl();
         }
-    }, [printer]); // Dependencia en el objeto completo puede ser menos eficiente si el objeto cambia a menudo
+    }, [printer]);
 
     return (
-        <div>
-            <h3>{printer.model}</h3>
-            <img src={imageUrl} alt={printer.model} />
+        <div className="printer-card">
+            <h2>{printer.model}</h2>
+            <img src={imageUrl} alt={printer.model} className="printer-image" />
+            <div className="printer-details">
+                <p><strong>Propietario:</strong> {printer.propietary}</p>
+                <p><strong>Especificaciones:</strong> {printer.specifications}</p>
+                <p><strong>Materiales:</strong> {printer.materials}</p>
+                <p><strong>Dimensiones Máximas:</strong> {printer.maxWidth}x{printer.maxLength}x{printer.maxHeight} mm</p>
+                <p><strong>Velocidad:</strong> {printer.speed} mm/s</p>
+                <p><strong>Costo de Material:</strong> ${printer.materialCost}</p>
+                <p><strong>Costo Operativo:</strong> ${printer.operationCost}</p>
+                <p><strong>Ubicación:</strong> Latitud {printer.latitude}, Longitud {printer.longitude}</p>
+                <p><strong>Verificado:</strong> {printer.verification ? 'Sí' : 'No'}</p>
+            </div>
         </div>
     );
 };

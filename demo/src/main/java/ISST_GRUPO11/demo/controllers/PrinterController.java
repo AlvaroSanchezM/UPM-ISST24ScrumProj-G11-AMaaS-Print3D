@@ -4,6 +4,7 @@ import ISST_GRUPO11.demo.models.Printer;
 import ISST_GRUPO11.demo.security.services.GeocodingService;
 import ISST_GRUPO11.demo.security.services.PrinterService;
 import io.jsonwebtoken.io.IOException;
+import java.util.Map; // Asegúrate de que esta línea está presente
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import ISST_GRUPO11.demo.models.Coordinates;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 // Importa ObjectMapper para deserialización JSON
 
@@ -26,12 +30,13 @@ import java.util.Base64;
 @RequestMapping("/api/printers")
 public class PrinterController {
 
-    private String convertToBase64(MultipartFile file) throws IOException, java.io.IOException {
-        return Base64.getEncoder().encodeToString(file.getBytes());
-    }
-
     @Autowired
     private PrinterService printerService;
+
+    private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dajhrhlba",
+            "api_key", "118397476628966",
+            "api_secret", "RBp1_4wayaK7hPx4hCuWygTibKs"));
 
     @GetMapping
     public ResponseEntity<List<Printer>> getMyPrinters() {
@@ -60,13 +65,14 @@ public class PrinterController {
                 printer.setLongitude(coordinates.getLongitude());
             }
 
-            // Convertir y asignar la imagen en Base64
-            String base64Image = convertToBase64(image);
-            printer.setImage(base64Image);
+            // Subir imagen a Cloudinary y obtener URL
+            Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = (String) uploadResult.get("url");
+            printer.setImageUrl(imageUrl);
 
             Printer savedPrinter = printerService.addPrinter(printer);
             return ResponseEntity.ok(savedPrinter);
-        } catch (IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error processing image: " + e.getMessage());
         }
     }
@@ -82,12 +88,43 @@ public class PrinterController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Printer> updatePrinter(@PathVariable Long id, @RequestBody Printer printerDetails) {
-        Printer updatedPrinter = printerService.updatePrinter(id, printerDetails);
-        if (updatedPrinter == null) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updatePrinter(@PathVariable Long id,
+            @RequestParam("printer") String printerStr,
+            @RequestParam(required = false) MultipartFile image) {
+        try {
+            Printer existingPrinter = printerService.findPrinterById(id)
+                    .orElseThrow(() -> new RuntimeException("Printer not found with id: " + id));
+
+            // Deserializar los datos del printer
+            Printer printerDetails = new ObjectMapper().readValue(printerStr, Printer.class);
+
+            // Actualizar los campos del printer
+            existingPrinter.setModel(printerDetails.getModel());
+            existingPrinter.setSpecifications(printerDetails.getSpecifications());
+            existingPrinter.setMaterials(printerDetails.getMaterials());
+            existingPrinter.setMaxWidth(printerDetails.getMaxWidth());
+            existingPrinter.setMaxLength(printerDetails.getMaxLength());
+            existingPrinter.setMaxHeight(printerDetails.getMaxHeight());
+            existingPrinter.setSpeed(printerDetails.getSpeed());
+            existingPrinter.setMaterialCost(printerDetails.getMaterialCost());
+            existingPrinter.setOperationCost(printerDetails.getOperationCost());
+            existingPrinter.setLatitude(printerDetails.getLatitude());
+            existingPrinter.setLongitude(printerDetails.getLongitude());
+            existingPrinter.setVerification(printerDetails.getVerification());
+
+            // Manejar la carga de la nueva imagen si se proporciona
+            if (image != null && !image.isEmpty()) {
+                Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+                String imageUrl = (String) uploadResult.get("url");
+                existingPrinter.setImageUrl(imageUrl);
+            }
+
+            // Guardar los cambios en la base de datos
+            printerService.updatePrinter(existingPrinter);
+            return ResponseEntity.ok(existingPrinter);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error updating printer: " + e.getMessage());
         }
-        return ResponseEntity.ok(updatedPrinter);
     }
 
     private static final int EARTH_RADIUS = 6371; // Radius of the earth in km
@@ -113,5 +150,16 @@ public class PrinterController {
             return Double.compare(distance1, distance2);
         });
         return ResponseEntity.ok(printers);
+    }
+
+    @GetMapping("/{id}/image-url")
+    public ResponseEntity<String> getPrinterImageUrl(@PathVariable Long id) {
+        Optional<Printer> printer = printerService.findPrinterById(id);
+        if (printer.isPresent()) {
+            String imageUrl = printer.get().getImageUrl();
+            return ResponseEntity.ok(imageUrl);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
