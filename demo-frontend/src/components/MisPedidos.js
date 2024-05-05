@@ -11,10 +11,6 @@ export default function MisPedidos() {
     useEffect(() => {
         const fetchUploads = async () => {
             try {
-<<<<<<< HEAD
-=======
-                // Corregir la URL para que coincida con el endpoint del backend
->>>>>>> 63f8e4e3a5c700e667081faf9e89e8ec5e17c91f
                 const response = await axios.get('/api/pedidos/myuploads', { withCredentials: true });
                 setUploads(response.data);
             } catch (error) {
@@ -27,10 +23,6 @@ export default function MisPedidos() {
 
     const handleViewDetails = async (orderId) => {
         try {
-<<<<<<< HEAD
-=======
-            // Corregir la URL para que coincida con el endpoint del backend
->>>>>>> 63f8e4e3a5c700e667081faf9e89e8ec5e17c91f
             const response = await axios.get(`/api/pedidos/${orderId}`, { withCredentials: true });
             setSelectedOrderDetails(response.data);
             setShowDetailsModal(true);

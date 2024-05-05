@@ -18,11 +18,7 @@ const Imprimir = () => {
 
     const fetchOrders = async () => {
         try {
-<<<<<<< HEAD
-            const response = await axios.get('/api/pedidos/myuploads', { withCredentials: true });
-=======
             const response = await axios.get('/api/pedidos/myprinters/orders');
->>>>>>> 63f8e4e3a5c700e667081faf9e89e8ec5e17c91f
             const allOrders = response.data;
             setUnassignedOrders(allOrders.filter(order => !order.printer));
             setAssignedOrders(allOrders.filter(order => order.printer));
