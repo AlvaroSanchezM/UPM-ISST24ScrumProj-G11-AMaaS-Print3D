@@ -45,6 +45,12 @@ public class PedidoService {
         return pedidoRepository.findByUsername(username);
     }
 
+    //Para dar servicio cuando quieres ver las ordenes recibidas
+    public List<Pedido> findPedidosByAceptadoPor(String aceptadoPor) {
+        // Get the username of the logged-in user
+        return pedidoRepository.findByAceptadoPor(aceptadoPor);
+    }
+
     public Optional<Pedido> getPedidoById(Integer id) {
         return pedidoRepository.findById(id);
     }

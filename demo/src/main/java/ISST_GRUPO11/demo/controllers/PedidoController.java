@@ -114,6 +114,17 @@ public class PedidoController {
         return ResponseEntity.ok(maxPagoId);
     }
 
+    //Gestión de pedidos recibidos
+    @GetMapping("/myprinters/orders")
+    @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    public ResponseEntity<List<Pedido>> getMyOrders() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();//pillar datos de la cookie
+        String aceptadoPor = authentication.getName();//Sacar el username del que quiere ver sus órdenes, de la cookie
+        List<Pedido> pedidos = pedidoService.findPedidosByAceptadoPor(aceptadoPor);//Sacar los pedidos asignados a este usuario
+        return ResponseEntity.ok(pedidos);
+    }
+
     private String getFileExtension(String contentType) {
         switch (contentType) {
             case "model/stl":

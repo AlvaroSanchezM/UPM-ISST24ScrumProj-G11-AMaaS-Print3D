@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     List<Pedido> findByUsername(String username);
+    List<Pedido> findByAceptadoPor(String aceptadoPor);
 
     @Query("SELECT MAX(p.pagoId) FROM Pedido p")
     Integer findMaxPagoId();
