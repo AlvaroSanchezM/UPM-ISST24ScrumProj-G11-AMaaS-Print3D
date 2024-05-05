@@ -17,15 +17,15 @@ const Profile = () => {
         <p><strong>Dirección:</strong>{currentUser.homeAddress}</p>
 
 
-        <div>
+       {/*<div>
           <strong>Authorities:</strong>
           <ul>
             {currentUser.roles &&
               currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
           </ul>
-        </div>
+            </div>*/}
       </div>
-    </div>
+            </div>
   );
 };
 

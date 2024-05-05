@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import AuthService from '../services/auth.service'; // Asegúrate de importar AuthService
+import "./css/OrderForm.css";
 
 const CreateOrder = () => {
     const { printerId } = useParams();
@@ -69,6 +70,7 @@ const CreateOrder = () => {
     };
 
     return (
+        <div className= "class-4">
         <form onSubmit={handleSubmit}>
             <input type="file" name="file" onChange={handleFileChange} required />
             <input type="text" name="material" placeholder="Material" value={orderDetails.material} onChange={handleInputChange} required />
@@ -77,6 +79,7 @@ const CreateOrder = () => {
             <input type="number" name="cantidad" placeholder="Cantidad" value={orderDetails.cantidad} onChange={handleInputChange} required />
             <button type="submit">Pagar</button>
         </form>
+        </div>
     );
 };
 
