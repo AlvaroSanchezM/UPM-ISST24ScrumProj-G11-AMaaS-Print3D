@@ -68,7 +68,6 @@ const AddPrinterModal = ({ show, handleClose, refreshPrinters }) => {
                         <Form.Label>Model</Form.Label>
                         <Form.Control type="text" name="model" required onChange={handleChange} />
                     </Form.Group>
-                    <Form.Label>Especificaciones</Form.Label>
                     <Form.Group className="mb-3">
                         <Form.Label>Materiales</Form.Label>
                         <Form.Control type="text" name="materials" required onChange={handleChange} />

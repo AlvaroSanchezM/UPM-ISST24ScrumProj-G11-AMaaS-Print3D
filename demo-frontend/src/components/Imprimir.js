@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Modal, Dropdown } from 'react-bootstrap';
+import './css/Imprimir.css';
 
 const Imprimir = () => {
     const [unassignedOrders, setUnassignedOrders] = useState([]);
@@ -67,7 +68,7 @@ const Imprimir = () => {
     };
 
     return (
-        <div className="container mt-3">
+        <div className="container mt-9">
             <h2>Imprimir Pedidos</h2>
             <h3>Pedidos sin asignar</h3>
             {unassignedOrders.map((order, index) => (
