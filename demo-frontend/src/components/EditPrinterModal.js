@@ -40,21 +40,24 @@ const EditPrinterModal = ({ show, handleClose, printerId, refreshPrinters }) => 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        Object.keys(printerData).forEach(key => {
-            formData.append(key, printerData[key]);
-        });
+        formData.append('printer', JSON.stringify(printerData));
+
         if (imageFile) {
             formData.append('image', imageFile);
         }
 
         try {
-            await axios.put(`/api/printers/${printerId}`, formData, { withCredentials: true });
-            handleClose();
-            refreshPrinters();
+            const response = await axios.put(`/api/printers/${printerId}`, formData, {
+                withCredentials: true
+            });
+            console.log('Update successful:', response.data);
+            handleClose(); // Cierra el modal
+            refreshPrinters(); // Actualiza la lista de impresoras
         } catch (error) {
-            console.error("Error updating printer:", error);
+            console.error("Error updating printer:", error.response ? error.response.data : error.message);
         }
     };
+
 
     return (
         <Modal show={show} onHide={handleClose}>
