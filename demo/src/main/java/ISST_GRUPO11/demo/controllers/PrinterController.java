@@ -100,7 +100,6 @@ public class PrinterController {
 
             // Actualizar los campos del printer
             existingPrinter.setModel(printerDetails.getModel());
-            existingPrinter.setSpecifications(printerDetails.getSpecifications());
             existingPrinter.setMaterials(printerDetails.getMaterials());
             existingPrinter.setMaxWidth(printerDetails.getMaxWidth());
             existingPrinter.setMaxLength(printerDetails.getMaxLength());

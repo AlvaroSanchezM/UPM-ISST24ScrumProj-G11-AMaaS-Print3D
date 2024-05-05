@@ -28,11 +28,6 @@ public class Printer {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "specifications")
-    private String specifications;
-
-    @NotBlank
-    @Size(max = 255)
     @Column(name = "materials")
     private String materials;
 
@@ -73,12 +68,11 @@ public class Printer {
     }
 
     // Constructor completo
-    public Printer(String propietary, String model, String specifications, String materials, String username,
+    public Printer(String propietary, String model, String materials, String username,
             Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, String imageUrl,
             Double operationCost, Boolean verification, Double latitude, Double longitude) {
         this.propietary = propietary;
         this.model = model;
-        this.specifications = specifications;
         this.materials = materials;
         this.username = username;
         this.maxWidth = maxWidth;
@@ -124,14 +118,6 @@ public class Printer {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getSpecifications() {
-        return specifications;
-    }
-
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications;
     }
 
     public String getMaterials() {

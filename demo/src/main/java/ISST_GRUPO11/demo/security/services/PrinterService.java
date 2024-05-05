@@ -32,7 +32,6 @@ public class PrinterService {
 
         // Actualizar todos los campos relevantes
         existingPrinter.setModel(printer.getModel());
-        existingPrinter.setSpecifications(printer.getSpecifications());
         existingPrinter.setMaterials(printer.getMaterials());
         existingPrinter.setMaxWidth(printer.getMaxWidth());
         existingPrinter.setMaxLength(printer.getMaxLength());

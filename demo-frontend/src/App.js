@@ -20,6 +20,9 @@ import MisPedidos from "./components/MisPedidos";
 import EventBus from "./common/EventBus";
 import MisImpresoras from "./components/MisImpresoras";
 import Imprimir from "./components/Imprimir";
+import PrinterDetails from "./components/PrinterDetails";
+import CreateOrder from "./components/CreateOrder";
+import Success from "./components/Success";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -148,7 +151,9 @@ const App = () => {
           <Route path="/imprimir" element={<PrivateRoute><Imprimir /></PrivateRoute>} />
           <Route path="/mispedidos" element={<PrivateRoute><MisPedidos /></PrivateRoute>} />
           <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
-
+          <Route path="/printer-details/:printerId" element={<PrivateRoute><PrinterDetails /></PrivateRoute>} />
+          <Route path="/create-order/:printerId" element={<PrivateRoute><CreateOrder /></PrivateRoute>} />
+          <Route path="/success" element={<PrivateRoute><Success /></PrivateRoute>} />
         </Routes>
       </div>
 
