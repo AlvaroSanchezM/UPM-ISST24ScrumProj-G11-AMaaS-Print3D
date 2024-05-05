@@ -84,4 +84,29 @@ public class PrinterController {
         }
         return ResponseEntity.ok(updatedPrinter);
     }
+
+    private static final int EARTH_RADIUS = 6371; // Radius of the earth in km
+
+    private static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                        * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = EARTH_RADIUS * c;
+        return distance;
+    }
+
+    @GetMapping("/nearby")
+    public ResponseEntity<List<Printer>> getNearbyPrinters(@RequestParam("latitude") Double latitude,
+            @RequestParam("longitude") Double longitude) {
+        List<Printer> printers = printerService.findAllPrinters();
+        printers.sort((p1, p2) -> {
+            double distance1 = calculateDistance(latitude, longitude, p1.getLatitude(), p1.getLongitude());
+            double distance2 = calculateDistance(latitude, longitude, p2.getLatitude(), p2.getLongitude());
+            return Double.compare(distance1, distance2);
+        });
+        return ResponseEntity.ok(printers);
+    }
 }

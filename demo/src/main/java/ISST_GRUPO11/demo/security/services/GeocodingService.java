@@ -1,28 +1,35 @@
 package ISST_GRUPO11.demo.security.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.client.RestTemplate;
 import ISST_GRUPO11.demo.models.Coordinates;
 
 public class GeocodingService {
 
-    private static final String API_KEY = "tu_api_key_aqui";
+    private static final String API_KEY = "AIzaSyA7s1147GX_tuFwDCrD5Z_YXKbYl13L6t0";
 
     public static Coordinates getCoordinatesFromAddress(String address) {
         RestTemplate restTemplate = new RestTemplate();
-        String apiUrl = "http://api.positionstack.com/v1/forward?access_key=" + API_KEY + "&query=" + address;
+        String apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + API_KEY;
         String response = restTemplate.getForObject(apiUrl, String.class);
-        // Parse the JSON response to extract latitude and longitude
-        // This step depends on the JSON parsing library you are using (e.g., Jackson,
-        // Gson)
-        // For simplicity, let's assume you have a method parseJsonToCoordinates that
-        // does this
         return parseJsonToCoordinates(response);
     }
 
-    // This method should parse the JSON response and return an object of type
-    // Coordinates
     private static Coordinates parseJsonToCoordinates(String jsonResponse) {
-        // Implement JSON parsing logic here
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonResponse);
+            JsonNode resultsNode = rootNode.path("results");
+            if (resultsNode.size() > 0) {
+                JsonNode locationNode = resultsNode.get(0).path("geometry").path("location");
+                Double latitude = locationNode.get("lat").asDouble();
+                Double longitude = locationNode.get("lng").asDouble();
+                return new Coordinates(latitude, longitude);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

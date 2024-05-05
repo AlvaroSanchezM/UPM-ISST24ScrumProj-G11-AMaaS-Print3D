@@ -39,4 +39,7 @@ public class PrinterService {
         return printerRepository.findById(id);
     }
 
+    public List<Printer> findAllPrinters() {
+        return printerRepository.findAll();
+    }
 }
