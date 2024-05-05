@@ -20,8 +20,7 @@ const Imprimir = () => {
         try {
             const response = await axios.get('/api/pedidos/myprinters/orders');
             const allOrders = response.data;
-            setUnassignedOrders(allOrders.filter(order => !order.printer));
-            setAssignedOrders(allOrders.filter(order => order.printer));
+            setAssignedOrders(allOrders.filter(order => !order.printer));
         } catch (error) {
             console.error("Error fetching orders:", error);
         }
@@ -70,20 +69,10 @@ const Imprimir = () => {
     return (
         <div className="container mt-9">
             <h2>Imprimir Pedidos</h2>
-            <h3>Pedidos sin asignar</h3>
-            {unassignedOrders.map((order, index) => (
-                <div key={order.id} className="card mb-3">
-                    <div className="card-body">
-                        <h5 className="card-title">Pedido {index + 1}</h5>
-                        <Button onClick={() => handleShowModal(order)}>Más Info</Button>
-                    </div>
-                </div>
-            ))}
-            <h3>Pedidos asignados</h3>
             {assignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
-                        <h5 className="card-title">Pedido {index + 1} (Asignado)</h5>
+                        <h5 className="card-title">Pedido {index + 1}</h5>
                         <Button variant="primary" onClick={() => handleDownloadFile(order.id)}>Descargar Archivo</Button>
                         <Button onClick={() => handleShowModal(order)}>Más Info</Button>
                     </div>
