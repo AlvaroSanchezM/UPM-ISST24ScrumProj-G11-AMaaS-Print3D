@@ -1,12 +1,19 @@
 package ISST_GRUPO11.demo.controllers;
 
 import ISST_GRUPO11.demo.models.Printer;
+import ISST_GRUPO11.demo.security.services.GeocodingService;
 import ISST_GRUPO11.demo.security.services.PrinterService;
+import io.jsonwebtoken.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ISST_GRUPO11.demo.models.Coordinates;
+
+import com.fasterxml.jackson.databind.ObjectMapper; // Importa ObjectMapper para deserialización JSON
 
 import java.util.List;
 import java.util.Optional;
@@ -25,19 +32,38 @@ public class PrinterController {
         List<Printer> printers = printerService.findPrintersByUsername(username);
         return ResponseEntity.ok(printers);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Printer> getPrinterById(@PathVariable Long id) {
         Optional<Printer> printer = printerService.findPrinterById(id);
         return printer.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PostMapping("/add")
-    public ResponseEntity<Printer> addPrinter(@RequestBody Printer printer) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        printer.setUsername(username); // Set the current user as the owner
-        Printer savedPrinter = printerService.addPrinter(printer);
-        return ResponseEntity.ok(savedPrinter);
+    public ResponseEntity<?> addPrinter(@RequestParam("image") MultipartFile image,
+            @RequestParam("printer") String printerStr,
+            @RequestParam("address") String address) throws java.io.IOException {
+        try {
+            // Deserializa la cadena JSON a un objeto Printer
+            Printer printer = new ObjectMapper().readValue(printerStr, Printer.class);
+
+            // Obtiene las coordenadas geográficas de la dirección
+            Coordinates coordinates = GeocodingService.getCoordinatesFromAddress(address);
+            if (coordinates != null) {
+                printer.setLatitude(coordinates.getLatitude());
+                printer.setLongitude(coordinates.getLongitude());
+            }
+
+            // Asigna la imagen convertida a bytes
+            printer.setImage(image.getBytes());
+
+            // Guarda el objeto Printer
+            Printer savedPrinter = printerService.addPrinter(printer);
+            return ResponseEntity.ok(savedPrinter);
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body("Error processing image: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")

@@ -13,6 +13,10 @@ public class Printer {
     @Column(name = "printer_id")
     private Long id;
 
+    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
+    @Lob
+    private byte[] image;
+
     @NotBlank
     @Size(max = 50)
     @Column(name = "propietary")
@@ -32,6 +36,12 @@ public class Printer {
     @Size(max = 255)
     @Column(name = "materials")
     private String materials;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
 
     @NotBlank
     @Size(max = 50)
@@ -65,8 +75,8 @@ public class Printer {
 
     // Constructor completo
     public Printer(String propietary, String model, String specifications, String materials, String username,
-            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost,
-            Double operationCost, Boolean verification) {
+            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, byte[] image,
+            Double operationCost, Boolean verification, Double latitude, Double longitude) {
         this.propietary = propietary;
         this.model = model;
         this.specifications = specifications;
@@ -76,9 +86,12 @@ public class Printer {
         this.maxLength = maxLength;
         this.maxHeight = maxHeight;
         this.speed = speed;
+        this.image = image;
         this.materialCost = materialCost;
         this.operationCost = operationCost;
         this.verification = verification;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     // Getters and Setters
@@ -88,6 +101,14 @@ public class Printer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getPropietary() {
@@ -184,6 +205,22 @@ public class Printer {
 
     public void setVerification(Boolean verification) {
         this.verification = verification;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
 }
