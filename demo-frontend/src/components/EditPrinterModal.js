@@ -5,7 +5,6 @@ import axios from 'axios';
 const EditPrinterModal = ({ show, handleClose, printerId, refreshPrinters }) => {
     const [printerData, setPrinterData] = useState({
         model: '',
-        specifications: '',
         materials: '',
         maxWidth: '',
         maxLength: '',
@@ -70,10 +69,7 @@ const EditPrinterModal = ({ show, handleClose, printerId, refreshPrinters }) => 
                         <Form.Label>Modelo</Form.Label>
                         <Form.Control type="text" name="model" value={printerData.model} onChange={handleChange} required />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Especificaciones</Form.Label>
-                        <Form.Control type="text" name="specifications" value={printerData.specifications} onChange={handleChange} required />
-                    </Form.Group>
+                    <Form.Label>Especificaciones:</Form.Label>
                     <Form.Group className="mb-3">
                         <Form.Label>Materiales</Form.Label>
                         <Form.Control type="text" name="materials" value={printerData.materials} onChange={handleChange} required />
