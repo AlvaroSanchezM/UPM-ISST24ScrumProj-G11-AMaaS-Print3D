@@ -37,9 +37,9 @@ const Design = () => {
                 <div key={printer.id} onClick={() => handlePrinterClick(printer)}>
                     <h3>{printer.propietary} - {printer.model}</h3>
                     <img src={printer.imageUrl} alt={`Imagen de ${printer.model}`} style={{ width: '100px', height: '100px' }} />
-                    <p><strong>Especificaciones:</strong> {printer.specifications}</p>
+                    <p><strong><u>Especificaciones:</u></strong></p>
                     <p><strong>Materiales:</strong> {printer.materials}</p>
-                    <p><strong>Verificación:</strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
+                    <p><strong><u>Verificación:</u></strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
                     <p>Distancia: {/* Calcular y mostrar la distancia */}</p>
                 </div>
             ))}

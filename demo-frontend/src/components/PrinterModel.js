@@ -26,15 +26,15 @@ const PrinterModel = ({ printer }) => {
             <h2>{printer.model}</h2>
             <img src={imageUrl} alt={printer.model} className="printer-image" />
             <div className="printer-details">
-                <p><strong>Propietario:</strong> {printer.propietary}</p>
-                <p><strong>Especificaciones:</strong> {printer.specifications}</p>
+                <p><strong><u>Propietario:</u></strong> {printer.propietary}</p>
+                <p><strong><u>Especificaciones:</u></strong></p>
                 <p><strong>Materiales:</strong> {printer.materials}</p>
                 <p><strong>Dimensiones Máximas:</strong> {printer.maxWidth}x{printer.maxLength}x{printer.maxHeight} mm</p>
                 <p><strong>Velocidad:</strong> {printer.speed} mm/s</p>
                 <p><strong>Costo de Material:</strong> ${printer.materialCost}</p>
                 <p><strong>Costo Operativo:</strong> ${printer.operationCost}</p>
-                <p><strong>Ubicación:</strong> Latitud {printer.latitude}, Longitud {printer.longitude}</p>
-                <p><strong>Verificado:</strong> {printer.verification ? 'Sí' : 'No'}</p>
+                <p><strong><u>Ubicación:</u></strong> Latitud {printer.latitude}, Longitud {printer.longitude}</p>
+                <p><strong><u>Verificado:</u></strong> {printer.verification ? 'Sí' : 'No'}</p>
             </div>
         </div>
     );
