@@ -1,26 +1,45 @@
-// CreateOrder.js
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import AuthService from '../services/auth.service'; // Asegúrate de importar AuthService
 
 const CreateOrder = () => {
     const { printerId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const printer = location.state?.printer; // Accede al objeto printer pasado como estado de navegación
     const currentUser = AuthService.getCurrentUser();
+
+    // Inicializa el estado de orderDetails con el valor de printer.username para aceptadoPor
     const [orderDetails, setOrderDetails] = useState({
         file: null,
         material: '',
         colorYAcabado: '',
         escala: '',
         cantidad: '',
-        aceptadoPor: 'Hola', // Este valor se obtendrá de la impresora
+        aceptadoPor: printer?.username || '', // Este valor se obtiene de la impresora
         pedidoPor: currentUser.username, // Este valor se obtiene de currentUser
-        pagoId: '',
+        pagoId: '', // Inicializa pagoId como una cadena vacía
     });
 
-    // Suponiendo que tienes una función para obtener el propietario de la impresora
+    // Función para obtener el pagoId más alto y sumarle 1
+    const fetchMaxPagoId = async () => {
+        try {
+            const response = await axios.get('/api/pedidos/maxPagoId');
+            const maxPagoId = response.data;
+            setOrderDetails(prevState => ({
+                ...prevState,
+                pagoId: (maxPagoId + 1).toString(), // Suma 1 y convierte a cadena
+            }));
+        } catch (error) {
+            console.error('Error al obtener el pagoId más alto:', error);
+        }
+    };
 
+    // Llama a fetchMaxPagoId cuando el componente se monta
+    useEffect(() => {
+        fetchMaxPagoId();
+    }, []);
 
     const handleInputChange = (e) => {
         setOrderDetails({ ...orderDetails, [e.target.name]: e.target.value });
@@ -56,7 +75,6 @@ const CreateOrder = () => {
             <input type="text" name="colorYAcabado" placeholder="Color y Acabado" value={orderDetails.colorYAcabado} onChange={handleInputChange} required />
             <input type="number" name="escala" placeholder="Escala" value={orderDetails.escala} onChange={handleInputChange} required />
             <input type="number" name="cantidad" placeholder="Cantidad" value={orderDetails.cantidad} onChange={handleInputChange} required />
-            <input type="number" name="pagoId" placeholder="ID de Pago" value={orderDetails.pagoId} onChange={handleInputChange} required />
             <button type="submit">Pagar</button>
         </form>
     );

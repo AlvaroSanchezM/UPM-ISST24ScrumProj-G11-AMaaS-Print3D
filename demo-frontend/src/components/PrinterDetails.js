@@ -28,6 +28,10 @@ const PrinterDetails = () => {
         lng: printer?.longitude || 0
     };
 
+    const handleCreateOrderClick = () => {
+        navigate(`/create-order/${printerId}`, { state: { printer } });
+    };
+
     return (
         <div>
             {printer && (
@@ -38,7 +42,7 @@ const PrinterDetails = () => {
                             <Marker position={defaultCenter} />
                         </GoogleMap>
                     </LoadScript>
-                    <button onClick={() => navigate(`/create-order/${printerId}`)}>Crear Pedido</button>
+                    <button onClick={handleCreateOrderClick}>Crear Pedido</button>
                 </>
             )}
         </div>

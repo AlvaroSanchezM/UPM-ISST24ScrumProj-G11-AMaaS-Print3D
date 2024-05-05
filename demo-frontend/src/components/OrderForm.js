@@ -19,7 +19,7 @@ const OrderForm = ({ printerId }) => {
             const { data } = await axios.post('/api/pedidos/upload', {
                 ...orderDetails,
                 printerId
-            });
+            }, { withCredentials: true });
             console.log('Pedido creado:', data);
         } catch (error) {
             console.error('Error creando el pedido:', error);

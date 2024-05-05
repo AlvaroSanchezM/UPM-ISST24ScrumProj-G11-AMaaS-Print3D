@@ -63,4 +63,13 @@ public class PedidoService {
             throw new RuntimeException("Pedido not found with id: " + pedidoId);
         }
     }
+
+    public Integer getMaxPagoId() {
+        return pedidoRepository.findMaxPagoId();
+    }
+
+    public void assignOrderToPrinter(Integer id, Integer printerId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignOrderToPrinter'");
+    }
 }
