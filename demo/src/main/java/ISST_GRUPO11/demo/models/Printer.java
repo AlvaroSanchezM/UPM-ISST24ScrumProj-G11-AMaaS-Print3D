@@ -13,9 +13,8 @@ public class Printer {
     @Column(name = "printer_id")
     private Long id;
 
-    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
-    @Lob
-    private byte[] image;
+    @Column(name = "image", columnDefinition = "TEXT")
+    private String image; // Almacenar como Base64
 
     @NotBlank
     @Size(max = 50)
@@ -75,7 +74,7 @@ public class Printer {
 
     // Constructor completo
     public Printer(String propietary, String model, String specifications, String materials, String username,
-            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, byte[] image,
+            Integer maxWidth, Integer maxLength, Integer maxHeight, Double speed, Double materialCost, String image,
             Double operationCost, Boolean verification, Double latitude, Double longitude) {
         this.propietary = propietary;
         this.model = model;
@@ -103,11 +102,11 @@ public class Printer {
         this.id = id;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

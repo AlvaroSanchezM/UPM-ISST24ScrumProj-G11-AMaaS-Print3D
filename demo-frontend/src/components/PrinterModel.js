@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const PrinterModel = ({ printer }) => {
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        const fetchImage = async () => {
+            try {
+                // Asegúrate de que estás usando printer.id para obtener la imagen
+                const response = await axios.get(`/api/printers/${printer.id}/image`);
+                console.log(response.data); // Verificar la cadena Base64 en la consola
+                setImageUrl(`data:image/jpeg;base64,${response.data}`);
+            } catch (error) {
+                console.error('Error fetching image', error);
+            }
+        };
+
+        if (printer && printer.id) {
+            fetchImage();
+        }
+    }, [printer]); // Dependencia en el objeto completo puede ser menos eficiente si el objeto cambia a menudo
+
     return (
-        <div className="card mb-3">
-            <div className="card-body">
-                <h5 className="card-title">{printer.model}</h5>
-                <p className="card-text">Specifications: {printer.specifications}</p>
-                <p className="card-text">Materials: {printer.materials}</p>
-                {/* Display the image if it exists */}
-                {printer.imageBase64 && (
-                    <img
-                        src={`data:image/jpeg;base64,${printer.imageBase64}`}
-                        alt="Printer"
-                        className="img-fluid"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                    />
-                )}
-                {/* Add more fields as necessary */}
-            </div>
+        <div>
+            <h3>{printer.model}</h3>
+            <img src={imageUrl} alt={printer.model} />
         </div>
     );
 };

@@ -13,14 +13,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ISST_GRUPO11.demo.models.Coordinates;
 
-import com.fasterxml.jackson.databind.ObjectMapper; // Importa ObjectMapper para deserialización JSON
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+// Importa ObjectMapper para deserialización JSON
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/api/printers")
 public class PrinterController {
+
+    private String convertToBase64(MultipartFile file) throws IOException, java.io.IOException {
+        return Base64.getEncoder().encodeToString(file.getBytes());
+    }
 
     @Autowired
     private PrinterService printerService;
@@ -45,20 +53,17 @@ public class PrinterController {
             @RequestParam("printer") String printerStr,
             @RequestParam("address") String address) throws java.io.IOException {
         try {
-            // Deserializa la cadena JSON a un objeto Printer
             Printer printer = new ObjectMapper().readValue(printerStr, Printer.class);
-
-            // Obtiene las coordenadas geográficas de la dirección
             Coordinates coordinates = GeocodingService.getCoordinatesFromAddress(address);
             if (coordinates != null) {
                 printer.setLatitude(coordinates.getLatitude());
                 printer.setLongitude(coordinates.getLongitude());
             }
 
-            // Asigna la imagen convertida a bytes
-            printer.setImage(image.getBytes());
+            // Convertir y asignar la imagen en Base64
+            String base64Image = convertToBase64(image);
+            printer.setImage(base64Image);
 
-            // Guarda el objeto Printer
             Printer savedPrinter = printerService.addPrinter(printer);
             return ResponseEntity.ok(savedPrinter);
         } catch (IOException e) {
