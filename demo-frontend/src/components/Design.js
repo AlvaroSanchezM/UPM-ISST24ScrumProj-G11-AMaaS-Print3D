@@ -34,7 +34,7 @@ const Design = () => {
     };
 
     return (
-        <div>
+        <div className= "mt-1">
             {printers.map(printer => (
                 <div key={printer.id} onClick={() => handlePrinterClick(printer)}>
                     <h3>{printer.propietary} - {printer.model}</h3>

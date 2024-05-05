@@ -23,6 +23,7 @@ import Imprimir from "./components/Imprimir";
 import PrinterDetails from "./components/PrinterDetails";
 import CreateOrder from "./components/CreateOrder";
 import Success from "./components/Success";
+import Footer from './components/Footer';
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -155,6 +156,7 @@ const App = () => {
           <Route path="/create-order/:printerId" element={<PrivateRoute><CreateOrder /></PrivateRoute>} />
           <Route path="/success" element={<PrivateRoute><Success /></PrivateRoute>} />
         </Routes>
+        <Footer/>
       </div>
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./css/OrderForm.css";
 
 const OrderForm = ({ printerId }) => {
     const [orderDetails, setOrderDetails] = useState({
@@ -27,6 +28,7 @@ const OrderForm = ({ printerId }) => {
     };
 
     return (
+        <div className= "class-4">
         <form onSubmit={handleSubmit}>
             <input name="material" value={orderDetails.material} onChange={handleChange} placeholder="Material" />
             <input name="colorYAcabado" value={orderDetails.colorYAcabado} onChange={handleChange} placeholder="Color y Acabado" />
@@ -34,6 +36,7 @@ const OrderForm = ({ printerId }) => {
             <input type="number" name="cantidad" value={orderDetails.cantidad} onChange={handleChange} placeholder="Cantidad" />
             <button type="submit">Hacer Pedido</button>
         </form>
+        </div>
     );
 };
 
