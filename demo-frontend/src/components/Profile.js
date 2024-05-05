@@ -4,6 +4,7 @@ import "./css/Profile.css"; // Importa el archivo CSS para estilos
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
+  const currentPosition = AuthService.getCurrentPosition();
 
   return (
     <div className="profile-container">
@@ -11,8 +12,9 @@ const Profile = () => {
         <h3>{currentUser.username} </h3>
       </header>
       <div className="profile-info">
-        
+
         <p><strong>Email:</strong> {currentUser.email}</p>
+        <p><strong>Dirección:</strong>{currentUser.homeAddress}</p>
 
 
         <div>

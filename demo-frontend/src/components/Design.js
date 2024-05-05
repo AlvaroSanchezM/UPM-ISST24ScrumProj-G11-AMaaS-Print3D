@@ -1,47 +1,44 @@
-import React, { useState } from 'react';
+// Design.js
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './css/Design.css';
-
+import AuthService from '../services/auth.service';
 
 const Design = () => {
-    const [file, setFile] = useState(null);
-    const [data, setData] = useState({ name: '', email: '', address: '' });
+    const [printers, setPrinters] = useState([]);
     const navigate = useNavigate();
+    const currentUser = AuthService.getCurrentUser();
 
-    const handleInputChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
+    useEffect(() => {
+        const fetchPrinters = async () => {
+            try {
+                const response = await axios.get('/api/printers/nearby', {
+                    params: {
+                        latitude: currentUser.latitude,
+                        longitude: currentUser.longitude,
+                    },
+                });
+                setPrinters(response.data);
+            } catch (error) {
+                console.error('Error fetching printers:', error);
+            }
+        };
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
-    const handlePayment = () => {
-        // Navigate to the Pagos component, passing the form data and file
-        navigate('/payment', { state: { data, file } });
-    };
+        fetchPrinters();
+    }, [currentUser]); // Dependencia en currentUser para reflejar cambios en la ubicación
 
     return (
-        <div className="design-form-container">
-            <header className="design-header">
-            <h2>Inicia tu impresión 3D</h2>
-            </header>
-            <form>
-                <label>Nombre:</label>
-                <input type="text" name="name" value={data.name} onChange={handleInputChange} />
-
-                <label>Email:</label>
-                <input type="email" name="email" value={data.email} onChange={handleInputChange} />
-
-                <label>Dirección:</label>
-                <input type="text" name="address" value={data.address} onChange={handleInputChange} />
-
-                <label>Archivo:</label>
-                <input type="file" onChange={handleFileChange} />
-
-                <button type="button" onClick={handlePayment}>Pagar</button>
-            </form>
+        <div>
+            {printers.map(printer => (
+                <div key={printer.id} onClick={() => navigate(`/printer-details/${printer.id}`)}>
+                    <h3>{printer.propietary} - {printer.model}</h3>
+                    <img src={printer.imageUrl} alt={`Imagen de ${printer.model}`} style={{ width: '100px', height: '100px' }} />
+                    <p><strong>Especificaciones:</strong> {printer.specifications}</p>
+                    <p><strong>Materiales:</strong> {printer.materials}</p>
+                    <p><strong>Verificación:</strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
+                    <p>Distancia: {/* Calcular y mostrar la distancia */}</p>
+                </div>
+            ))}
         </div>
     );
 };

@@ -35,6 +35,12 @@ public class User {
     @Size(max = 255)
     private String homeAddress;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -42,11 +48,14 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password, String homeAddress) {
+    public User(String username, String email, String password, String homeAddress, Double latitude, Double longitude) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.homeAddress = homeAddress;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
     }
 
     public Long getId() {
@@ -96,4 +105,21 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
 }

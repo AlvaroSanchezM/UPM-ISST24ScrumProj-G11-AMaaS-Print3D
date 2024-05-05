@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ISST_GRUPO11.demo.models.Coordinates;
 import ISST_GRUPO11.demo.models.ERole;
 import ISST_GRUPO11.demo.models.Role;
 import ISST_GRUPO11.demo.models.User;
@@ -34,6 +35,7 @@ import ISST_GRUPO11.demo.payload.response.MessageResponse;
 import ISST_GRUPO11.demo.repository.RoleRepository;
 import ISST_GRUPO11.demo.repository.UserRepository;
 import ISST_GRUPO11.demo.security.jwt.JwtUtils;
+import ISST_GRUPO11.demo.security.services.GeocodingService;
 import ISST_GRUPO11.demo.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -42,6 +44,8 @@ import ISST_GRUPO11.demo.security.services.UserDetailsImpl;
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
+
+    GeocodingService geocodingService;
 
     @Autowired
     UserRepository userRepository;
@@ -82,7 +86,10 @@ public class AuthController {
                 .body(new UserInfoResponse(userDetails.getId(),
                         userDetails.getUsername(), // Aquí se incluye el nombre de usuario
                         userDetails.getEmail(),
-                        roles));
+                        roles,
+                        userDetails.getHomeAddress(),
+                        userDetails.getLatitude(),
+                        userDetails.getLongitude()));
     }
 
     @PostMapping("/signup")
@@ -95,11 +102,15 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
+        Coordinates coordinates = geocodingService.getCoordinatesFromAddress(signUpRequest.getHomeAddress());
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
-                signUpRequest.getHomeAddress());
+                signUpRequest.getHomeAddress(),
+                coordinates.getLatitude(),
+                coordinates.getLongitude());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

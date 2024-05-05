@@ -24,16 +24,25 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
+    private String homeAddress;
+
+    private Double latitude;
+
+    private Double longitude;
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-            Collection<? extends GrantedAuthority> authorities) {
+            Collection<? extends GrantedAuthority> authorities, String homeAddress, Double latitude, Double longitude) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-
+        this.homeAddress = homeAddress;
         this.authorities = authorities;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
     }
 
     public static UserDetailsImpl build(User user) {
@@ -46,7 +55,10 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities);
+                authorities,
+                user.getHomeAddress(),
+                user.getLatitude(),
+                user.getLongitude());
     }
 
     @Override
@@ -60,6 +72,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getHomeAddress() {
+        return homeAddress;
     }
 
     @Override
@@ -101,4 +117,13 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
     }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
 }
