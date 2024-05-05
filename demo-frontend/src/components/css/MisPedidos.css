@@ -6,7 +6,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra suave para los contenedores */
 }
 .container-mis-pedidos h2 {
-    background-color: blue; /* Fondo azul para el título */
+    background-color: #007bff; /* Fondo azul para el título */
     color: white; /* Texto blanco para el título */
     padding: 10px; /* Añade espacio interno alrededor del título */
     border-top-left-radius: 8px; /* Redondea las esquinas superiores del título */
