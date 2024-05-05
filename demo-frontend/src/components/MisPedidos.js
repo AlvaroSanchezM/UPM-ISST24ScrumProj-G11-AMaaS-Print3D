@@ -11,7 +11,8 @@ export default function MisPedidos() {
     useEffect(() => {
         const fetchUploads = async () => {
             try {
-                const response = await axios.get('/api/files/myuploads', { withCredentials: true });
+                // Corregir la URL para que coincida con el endpoint del backend
+                const response = await axios.get('/api/pedidos/myuploads', { withCredentials: true });
                 setUploads(response.data);
             } catch (error) {
                 console.error("Error fetching uploads:", error);
@@ -23,7 +24,8 @@ export default function MisPedidos() {
 
     const handleViewDetails = async (orderId) => {
         try {
-            const response = await axios.get(`/api/files/${orderId}`, { withCredentials: true });
+            // Corregir la URL para que coincida con el endpoint del backend
+            const response = await axios.get(`/api/pedidos/${orderId}`, { withCredentials: true });
             setSelectedOrderDetails(response.data);
             setShowDetailsModal(true);
         } catch (error) {
@@ -38,13 +40,13 @@ export default function MisPedidos() {
                 uploads.map((upload, index) => (
                     <div key={index} className="card mb-3 card-mis-pedidos">
                         <div className="card-body">
-                            <h5 className="card-title">Pedidos {index + 1}</h5>
+                            <h5 className="card-title">Pedido {index + 1}</h5>
                             <button className="btn btn-primary" onClick={() => handleViewDetails(upload.id)}>Más información</button>
                         </div>
                     </div>
                 ))
             ) : (
-                <p>No uploads found.</p>
+                <p>No se encontraron pedidos.</p>
             )}
             <OrderDetailsModal
                 show={showDetailsModal}

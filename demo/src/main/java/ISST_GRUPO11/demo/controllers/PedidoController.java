@@ -92,6 +92,12 @@ public class PedidoController {
         }
     }
 
+    @GetMapping("/maxPagoId")
+    public ResponseEntity<Integer> getMaxPagoId() {
+        Integer maxPagoId = pedidoService.getMaxPagoId();
+        return ResponseEntity.ok(maxPagoId);
+    }
+
     private String getFileExtension(String contentType) {
         switch (contentType) {
             case "model/stl":
