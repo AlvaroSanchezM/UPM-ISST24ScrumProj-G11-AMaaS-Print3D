@@ -114,15 +114,29 @@ public class PedidoController {
         return ResponseEntity.ok(maxPagoId);
     }
 
-    //Gestión de pedidos recibidos
+    // Gestión de pedidos recibidos
     @GetMapping("/myprinters/orders")
     @PreAuthorize("isAuthenticated()")
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public ResponseEntity<List<Pedido>> getMyOrders() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();//pillar datos de la cookie
-        String aceptadoPor = authentication.getName();//Sacar el username del que quiere ver sus órdenes, de la cookie
-        List<Pedido> pedidos = pedidoService.findPedidosByAceptadoPor(aceptadoPor);//Sacar los pedidos asignados a este usuario
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();// pillar datos de la
+                                                                                               // cookie
+        String aceptadoPor = authentication.getName();// Sacar el username del que quiere ver sus órdenes, de la cookie
+        List<Pedido> pedidos = pedidoService.findPedidosByAceptadoPor(aceptadoPor);// Sacar los pedidos asignados a este
+                                                                                   // usuario
         return ResponseEntity.ok(pedidos);
+    }
+
+    @PutMapping("/{id}/complete")
+    @PreAuthorize("isAuthenticated()")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    public ResponseEntity<?> completePedido(@PathVariable Integer id) {
+        try {
+            Pedido pedido = pedidoService.completePedido(id);
+            return ResponseEntity.ok("Pedido marcado como completado con éxito: " + pedido.getId());
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error al completar el pedido: " + e.getMessage());
+        }
     }
 
     private String getFileExtension(String contentType) {

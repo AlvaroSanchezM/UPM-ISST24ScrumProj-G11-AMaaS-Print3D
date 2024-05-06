@@ -42,6 +42,8 @@ public class Pedido {
     // Nuevo campo para almacenar el tipo de archivo
     private String fileType;
 
+    private boolean terminado;
+
     // Constructores
     public Pedido() {
     }
@@ -56,7 +58,8 @@ public class Pedido {
         this.aceptadoPor = aceptadoPor;
         this.pedidoPor = pedidoPor;
         this.pagoId = pagoId;
-        this.fileType = fileType; // Inicializa el nuevo campo
+        this.fileType = fileType;
+        this.terminado = false;
     }
 
     // Getters and Setters
@@ -149,16 +152,12 @@ public class Pedido {
         this.fileType = fileType;
     }
 
-    // Métodos setPrinter no implementados
-
-    public void setPrinter(Integer printerId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPrinter'");
+    public boolean isTerminado() {
+        return terminado;
     }
 
-    public void setPrinter(String printerId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPrinter'");
+    public void setTerminado(boolean terminado) {
+        this.terminado = terminado;
     }
 
 }

@@ -156,9 +156,9 @@ const App = () => {
           <Route path="/create-order/:printerId" element={<PrivateRoute><CreateOrder /></PrivateRoute>} />
           <Route path="/success" element={<PrivateRoute><Success /></PrivateRoute>} />
         </Routes>
-        <Footer/>
-      </div>
 
+      </div>
+      <Footer />
 
     </div>
   );

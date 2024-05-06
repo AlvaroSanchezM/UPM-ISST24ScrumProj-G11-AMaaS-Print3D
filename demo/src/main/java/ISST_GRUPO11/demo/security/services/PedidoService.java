@@ -21,7 +21,6 @@ public class PedidoService {
     public Pedido storePedido(MultipartFile file, String material, String colorYAcabado, Integer escala,
             Integer cantidad, String aceptadoPor, String pedidoPor, Integer pagoId, String fileType)
             throws IOException {
-        // Get the username of the logged-in user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -34,8 +33,9 @@ public class PedidoService {
         pedido.setPedidoPor(pedidoPor);
         pedido.setPagoId(pagoId);
         pedido.setArchivo(file.getBytes());
-        pedido.setFileType(fileType); // Asigna el tipo de archivo al pedido
-        pedido.setUsername(username); // Asegúrate de que el campo username exista en tu modelo Pedido
+        pedido.setFileType(fileType);
+        pedido.setUsername(username);
+        pedido.setTerminado(false); // Inicializa el campo 'terminado' en false
 
         return pedidoRepository.save(pedido);
     }
@@ -45,7 +45,7 @@ public class PedidoService {
         return pedidoRepository.findByUsername(username);
     }
 
-    //Para dar servicio cuando quieres ver las ordenes recibidas
+    // Para dar servicio cuando quieres ver las ordenes recibidas
     public List<Pedido> findPedidosByAceptadoPor(String aceptadoPor) {
         // Get the username of the logged-in user
         return pedidoRepository.findByAceptadoPor(aceptadoPor);
@@ -68,6 +68,14 @@ public class PedidoService {
         } else {
             throw new RuntimeException("Pedido not found with id: " + pedidoId);
         }
+    }
+
+    public Pedido completePedido(Integer id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + id));
+
+        pedido.setTerminado(true);
+        return pedidoRepository.save(pedido);
     }
 
     public Integer getMaxPagoId() {
