@@ -41,7 +41,7 @@ const MisImpresoras = () => {
     };
 
     return (
-        <Container className="mt-7">
+        <div className="printer-container">
             <Row>
                 <Col>
                     <div className="misimpresoras-header">
@@ -71,7 +71,7 @@ const MisImpresoras = () => {
             <AddPrinterModal show={showModal} handleClose={() => setShowModal(false)} refreshPrinters={fetchPrinters} />
             <DeleteConfirmationModal show={showDeleteModal} handleClose={() => setShowDeleteModal(false)} handleDelete={() => handleDelete(selectedPrinterId)} />
             <EditPrinterModal show={showEditModal} handleClose={() => setShowEditModal(false)} printerId={selectedPrinterId} refreshPrinters={fetchPrinters} />
-        </Container>
+        </div>
     );
 };
 

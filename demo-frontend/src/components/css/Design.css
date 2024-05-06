@@ -7,11 +7,14 @@
     border-radius: 5px;
   }
 
-  .mt-1{
-    background-color: #fff;
+  .design-container{
+    width: 1200px;
+    max-height: 1200px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    border-radius: 20px;
+    background-color: #ffffff;
   }
   
   .design-header {
@@ -33,6 +36,12 @@
   
   .design-form-container label {
     margin-bottom: 5px;
+  }
+
+  .card-body {
+    padding: 20px;
+    text-align: left;
+    max-width: 35%; /* Ensure content text is aligned to the left */
   }
   
   .design-form-container input[type="text"],

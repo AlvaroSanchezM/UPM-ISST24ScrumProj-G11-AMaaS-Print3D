@@ -1,4 +1,24 @@
 /* Navigation Bar Styling */
+
+/* Ensure the body takes full viewport height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#app { /* Asegúrate de que este ID coincida con el contenedor principal de tu React app */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Uso de Viewport Height para asegurar que tome toda la altura de la ventana */
+}
+
+/* Flex container to hold everything */
+#root, .app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .navbar {
   background-color: #007bff; /* Bootstrap primary color */
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
@@ -11,6 +31,11 @@
 .nav-link:hover {
   background-color: #92aecc; /* Darker blue on hover */
   border-radius: 20px;
+}
+
+.navbar-expand{
+  justify-content: space-between;
+
 }
 
 

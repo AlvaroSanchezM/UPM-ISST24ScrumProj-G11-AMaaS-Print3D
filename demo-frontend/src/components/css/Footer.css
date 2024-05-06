@@ -1,14 +1,14 @@
 
 
 .footer {
-  background-color: white; /* Fondo oscuro para un look profesional */
+  background-color: white;
   color: black;
   text-align: center;
-  padding: 1px 20px; /* Reduce el padding para hacerlo más estrecho */
-  font-size: 15px; /* Tamaño de fuente más pequeño */
-  margin: 20px auto 0; /* Asegúrate de que no hay margen externo */
-  width: 100%; /* Controla el ancho para asegurarte de que ocupa el espacio deseado */
-  box-sizing: border-box; /* Asegura que el padding no expanda el elemento */
+  padding: 5px 0;
+  font-size: 15px;
+  margin-top: auto; /* Empuja el footer hacia abajo */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer a {
@@ -19,4 +19,13 @@
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+  padding: 10px 0px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }

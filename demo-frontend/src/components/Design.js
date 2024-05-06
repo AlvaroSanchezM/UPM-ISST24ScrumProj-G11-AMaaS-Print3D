@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import './css/Design.css';
+import { Row, Col } from 'react-bootstrap';
 
 
 const Design = () => {
@@ -34,17 +35,27 @@ const Design = () => {
     };
 
     return (
-        <div className= "mt-1">
-            {printers.map(printer => (
-                <div key={printer.id} onClick={() => handlePrinterClick(printer)}>
-                    <h3>{printer.propietary} - {printer.model}</h3>
-                    <img src={printer.imageUrl} alt={`Imagen de ${printer.model}`} style={{ width: '100px', height: '100px' }} />
-                    <p><strong><u>Especificaciones:</u></strong></p>
-                    <p><strong>Materiales:</strong> {printer.materials}</p>
-                    <p><strong><u>Verificación:</u></strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
-                    <p>Distancia: {/* Calcular y mostrar la distancia */}</p>
-                </div>
-            ))}
+        <div className="design-container">
+            <Row>
+                <Col>
+                    <div className="misimpresoras-header">
+                        <h2>Diseña tus modelos</h2>
+
+                    </div>
+                </Col>
+            </Row>
+            <div className='card-body'> {/* Agregar una clase para los estilos de los cards, por ejemplo 'printers-container' */}
+                {printers.map(printer => (
+                    <div className="printer-card" key={printer.id} onClick={() => handlePrinterClick(printer)}>
+                        <h3>{printer.propietary} - {printer.model}</h3>
+                        <img src={printer.imageUrl} alt={`Imagen de ${printer.model}`} style={{ width: '100px', height: '100px' }} />
+                        <p><strong><u>Especificaciones:</u></strong></p>
+                        <p><strong>Materiales:</strong> {printer.materials}</p>
+                        <p><strong><u>Verificación:</u></strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
+                        <p>Distancia: {/* Calcular y mostrar la distancia */}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
