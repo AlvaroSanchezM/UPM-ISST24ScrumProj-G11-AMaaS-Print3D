@@ -7,14 +7,14 @@ const Success = () => {
         <div className="success-container">
             <Card className="text-center success-card">
                 <Card.Header as="h5">¡Éxito!</Card.Header>
-                <Card.Body>
-                    <div className="success-icon">
+                <Card className="success-icon">
+                    <Card.Body>
                         <Card.Title>Pago completado con éxito</Card.Title>
                         <Card.Text>
                             Tu pedido ha sido procesado y está en camino. Gracias por tu compra.
                         </Card.Text>
-                    </div>
-                </Card.Body>
+                    </Card.Body>
+                </Card>
             </Card>
         </div>
     );
