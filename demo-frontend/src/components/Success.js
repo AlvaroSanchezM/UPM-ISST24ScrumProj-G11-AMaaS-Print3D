@@ -1,12 +1,21 @@
-// Success.js
 import React from 'react';
-import "./css/OrderForm.css";
+import { Card } from 'react-bootstrap';
+import "./css/Success.css"; // Asegúrate de que los estilos están bien definidos aquí
 
 const Success = () => {
     return (
-        <div className= "class-4">
-            <h2>Pago completado con éxito!</h2>
-            <p>Tu pedido ha sido procesado.</p>
+        <div className="success-container">
+            <Card className="text-center success-card">
+                <Card.Header as="h5">¡Éxito!</Card.Header>
+                <Card.Body>
+                    <div className="success-icon">
+                        <Card.Title>Pago completado con éxito</Card.Title>
+                        <Card.Text>
+                            Tu pedido ha sido procesado y está en camino. Gracias por tu compra.
+                        </Card.Text>
+                    </div>
+                </Card.Body>
+            </Card>
         </div>
     );
 };

@@ -1,0 +1,35 @@
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.success-card {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.card-header {
+    background-color: #28a745; /* Color verde para indicar éxito */
+    color: white;
+}
+
+.card-body {
+    padding: 20px;
+    justify-content: center;
+}
+
+.card-title {
+    color: #333; /* Color oscuro para el título para mejor legibilidad */
+}
+
+.card-text {
+    color: #666; /* Color más suave para el texto para no sobrecargar visualmente */
+}
+
+.success-icon {
+    align-items: center;
+}
