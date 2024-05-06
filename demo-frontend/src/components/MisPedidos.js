@@ -32,7 +32,7 @@ export default function MisPedidos() {
     };
 
     return (
-        <div className="container mt-5 container-mis-pedidos">
+        <div className="printer-container">
             <h2 className="mb-4">Mis Pedidos</h2>
             {uploads.length > 0 ? (
                 uploads.map((upload, index) => (

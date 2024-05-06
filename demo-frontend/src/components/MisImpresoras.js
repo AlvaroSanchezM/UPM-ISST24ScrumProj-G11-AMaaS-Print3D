@@ -53,19 +53,19 @@ const MisImpresoras = () => {
             {error && (
                 <Alert variant="danger" className="mt-7">{error}</Alert>
             )}
-            <Row xs={1} md={2} className="g-4">
+            <Row xs={1} md={2} lg={3} > {/* Ajustado para manejar tres columnas en pantallas grandes */}
                 {printers.map((printer) => (
-                    <Col key={printer.id}>
-                        <Card className="card-square">
-                            <Card.Body>
-                                <PrinterModel printer={printer} />
-                                <div className="button-group">
-                                    <Button variant="info" onClick={() => { setSelectedPrinterId(printer.id); setShowEditModal(true); }}>Editar</Button>
-                                    <Button variant="danger" onClick={() => { setSelectedPrinterId(printer.id); setShowDeleteModal(true); }}>Eliminar</Button>
-                                </div>
-                            </Card.Body>
+                    <div key={printer.id}>
+                        <Card className="printer-card">
+
+                            <PrinterModel printer={printer} />
+                            <div className="button-group">
+                                <Button variant="info" onClick={() => { setSelectedPrinterId(printer.id); setShowEditModal(true); }}>Editar</Button>
+                                <Button variant="danger" onClick={() => { setSelectedPrinterId(printer.id); setShowDeleteModal(true); }}>Eliminar</Button>
+                            </div>
+
                         </Card>
-                    </Col>
+                    </div>
                 ))}
             </Row>
             <AddPrinterModal show={showModal} handleClose={() => setShowModal(false)} refreshPrinters={fetchPrinters} />

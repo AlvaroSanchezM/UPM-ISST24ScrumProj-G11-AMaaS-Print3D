@@ -50,7 +50,7 @@ const Imprimir = () => {
     };
 
     return (
-        <div className="container mt-9">
+        <div className="printer-container">
             <h2>Imprimir Pedidos</h2>
             <h3>Pedidos Sin Completar</h3>
             {assignedOrders.map((order, index) => (

@@ -22,7 +22,7 @@ const PrinterModel = ({ printer }) => {
     }, [printer]);
 
     return (
-        <div className="printer-card">
+        <div>
             <h2>{printer.model}</h2>
             <img src={imageUrl} alt={printer.model} className="printer-image" />
             <div className="printer-details">
