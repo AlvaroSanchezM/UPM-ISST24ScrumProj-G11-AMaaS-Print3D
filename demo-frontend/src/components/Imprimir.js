@@ -51,7 +51,9 @@ const Imprimir = () => {
 
     return (
         <div className="printer-container">
-            <h2>Imprimir Pedidos</h2>
+            <div className="misimpresoras-header">
+                <h2>Imprimir</h2>
+            </div>
             <h3>Pedidos Sin Completar</h3>
             {assignedOrders.map((order, index) => (
                 <div key={order.id} className="card mb-3">

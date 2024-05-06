@@ -33,7 +33,9 @@ export default function MisPedidos() {
 
     return (
         <div className="printer-container">
-            <h2 className="mb-4">Mis Pedidos</h2>
+            <div className="misimpresoras-header">
+                <h2>Mis Pedidos</h2>
+            </div>
             {uploads.length > 0 ? (
                 uploads.map((upload, index) => (
                     <div key={index} className="card mb-3 card-mis-pedidos">
