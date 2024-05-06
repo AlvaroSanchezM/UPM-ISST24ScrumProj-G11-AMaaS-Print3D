@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import './css/Register.css'
 
 import AuthService from "../services/auth.service";
 
@@ -60,7 +61,7 @@ const Register = (props) => {
   const [calle, setCalle] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  
+
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -156,63 +157,63 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-              <label htmlFor="pais">Pais</label>
-              <Input
-              type="text"
-              className="form-control"
-              name="pais"
-              value={pais}
-              onChange={(e) => setPais(e.target.value)}
-              validations={[required]}
-            />
-          </div>
+                <label htmlFor="pais">Pais</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="pais"
+                  value={pais}
+                  onChange={(e) => setPais(e.target.value)}
+                  validations={[required]}
+                />
+              </div>
 
               <div className="form-group">
-              <label htmlFor="provincia">Provincia</label>
-             <Input
-              type="text"
-              className="form-control"
-              name="provincia"
-              value={provincia}
-              onChange={(e) => setProvincia(e.target.value)}
-              validations={[required]}
-            />
-          </div>
-          <div className="form-group">
-              <label htmlFor="ciudad">Ciudad</label>
-             <Input
-              type="text"
-              className="form-control"
-              name="ciudad"
-              value={ciudad}
-              onChange={(e) => setCiudad(e.target.value)}
-              validations={[required]}
-            />
-          </div>
+                <label htmlFor="provincia">Provincia</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="provincia"
+                  value={provincia}
+                  onChange={(e) => setProvincia(e.target.value)}
+                  validations={[required]}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="ciudad">Ciudad</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="ciudad"
+                  value={ciudad}
+                  onChange={(e) => setCiudad(e.target.value)}
+                  validations={[required]}
+                />
+              </div>
 
-          <div className="form-group">
-              <label htmlFor="codigoPostal">Código Postal</label>
-             <Input
-              type="text"
-              className="form-control"
-              name="codigoPostal"
-              value={codigoPostal}
-              onChange={(e) => setCodigoPostal(e.target.value)}
-              validations={[required]}
-            />
-          </div>
+              <div className="form-group">
+                <label htmlFor="codigoPostal">Código Postal</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="codigoPostal"
+                  value={codigoPostal}
+                  onChange={(e) => setCodigoPostal(e.target.value)}
+                  validations={[required]}
+                />
+              </div>
 
-          <div className="form-group">
-              <label htmlFor="calle">Calle</label>
-             <Input
-              type="text"
-              className="form-control"
-              name="calle"
-              value={calle}
-              onChange={(e) => setCalle(e.target.value)}
-              validations={[required]}
-            />
-          </div>
+              <div className="form-group">
+                <label htmlFor="calle">Calle</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="calle"
+                  value={calle}
+                  onChange={(e) => setCalle(e.target.value)}
+                  validations={[required]}
+                />
+              </div>
 
 
               <div className="form-group">

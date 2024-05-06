@@ -1,8 +1,8 @@
-// PrinterDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
+import './css/PrinterDetails.css'; // Asegúrate de que los estilos están bien definidos aquí
 
 const PrinterDetails = () => {
     const { printerId } = useParams();
@@ -33,17 +33,21 @@ const PrinterDetails = () => {
     };
 
     return (
-        <div>
-            {printer && (
+        <div className="printer-details-container">
+            {printer ? (
                 <>
-                    <h2>{printer.propietary} - {printer.model}</h2>
-                    <LoadScript googleMapsApiKey="AIzaSyA7s1147GX_tuFwDCrD5Z_YXKbYl13L6t0">
-                        <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={defaultCenter}>
-                            <Marker position={defaultCenter} />
-                        </GoogleMap>
-                    </LoadScript>
-                    <button onClick={handleCreateOrderClick}>Crear Pedido</button>
+                    <h2>Esta impresora se encuentra en:</h2>
+                    <div className="map-container">
+                        <LoadScript googleMapsApiKey="AIzaSyA7s1147GX_tuFwDCrD5Z_YXKbYl13L6t0">
+                            <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={defaultCenter}>
+                                <Marker position={defaultCenter} />
+                            </GoogleMap>
+                        </LoadScript>
+                    </div>
+                    <button className="create-order-button" onClick={handleCreateOrderClick}>Crear Pedido</button>
                 </>
+            ) : (
+                <p>Loading printer details...</p>
             )}
         </div>
     );
