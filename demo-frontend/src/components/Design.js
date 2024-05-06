@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import './css/Design.css';
 import { Row, Col } from 'react-bootstrap';
+import PrinterModel from './PrinterModel';
 
 const Design = () => {
     const [printers, setPrinters] = useState([]);
@@ -40,7 +41,7 @@ const Design = () => {
                         <h2>Diseña tus modelos</h2>
                     </div>
                     <div className="design-info">
-                        <p>Selecciona una impresora para comenzar a diseñar tus modelos.</p>
+                        <h3>Selecciona una impresora para comenzar a diseñar tus modelos.</h3>
                     </div>
                 </Col>
             </Row>
@@ -48,12 +49,7 @@ const Design = () => {
                 {printers.map(printer => (
                     <Col key={printer.id} onClick={() => handlePrinterClick(printer)}>
                         <div className="printer-card">
-                            <h3>{printer.model}</h3>
-                            <img src={printer.imageUrl} alt={`Imagen de ${printer.model}`} style={{ width: '100px', height: '100px' }} />
-                            <p><strong><u>Especificaciones:</u></strong></p>
-                            <p><strong>Materiales:</strong> {printer.materials}</p>
-                            <p><strong><u>Verificación:</u></strong> {printer.verification ? 'Verificada' : 'No verificada'}</p>
-                            <p>Distancia: {/* Calcular y mostrar la distancia */}</p>
+                            <PrinterModel printer={printer} />
                         </div>
                     </Col>
                 ))}

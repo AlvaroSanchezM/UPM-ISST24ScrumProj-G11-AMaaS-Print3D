@@ -53,7 +53,7 @@ const MisImpresoras = () => {
             {error && (
                 <Alert variant="danger" className="mt-7">{error}</Alert>
             )}
-            <Row xs={1} md={2} lg={3} > {/* Ajustado para manejar tres columnas en pantallas grandes */}
+            <Row xs={1} md={2} lg={3} className='g-4'> {/* Ajustado para manejar tres columnas en pantallas grandes */}
                 {printers.map((printer) => (
                     <div key={printer.id}>
                         <Card className="printer-card">

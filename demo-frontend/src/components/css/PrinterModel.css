@@ -17,11 +17,15 @@
 }
 
 .printer-details {
-    text-align: left;
-    width: 100%;
+    text-align: left; /* Alineación del texto a la izquierda */
+    font-size: 16px; /* Tamaño de fuente legible */
 }
 
-.printer-details p {
-    margin: 5px 0;
-    font-size: 16px;
+.printer-details ul {
+    list-style-type: none; /* Remueve los bullets de la lista */
+    padding: 0;
+}
+
+.printer-details li {
+    padding-bottom: 10px; /* Espacio entre los ítems de la lista */
 }
