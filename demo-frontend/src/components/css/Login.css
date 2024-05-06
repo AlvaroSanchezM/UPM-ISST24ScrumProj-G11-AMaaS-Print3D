@@ -1,4 +1,41 @@
-.container.mt-3 {
-    background-color: transparent !important; 
-  }
-  
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajusta la altura para centrar verticalmente */
+}
+
+.card-container {
+  width: 100%;
+  max-width: 360px; /* Ancho máximo para el formulario */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.profile-img-card {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px; /* Centra la imagen y añade espacio debajo */
+  border-radius: 50%; /* Hace la imagen redonda */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Espacio entre campos del formulario */
+}
+
+.btn-primary {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-primary:hover {
+  background-color: #003567;
+  border-color: #002752;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  margin-top: 5px;
+}
