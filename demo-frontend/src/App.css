@@ -1,38 +1,69 @@
-
-label {
-  display: block;
-  margin-top: 10px;
+/* Navigation Bar Styling */
+.navbar {
+  background-color: #007bff; /* Bootstrap primary color */
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
 
-.card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
-  background-color:rgba(255, 255, 255, 0.5);
-  border: 2px solid #fff; 
-  border-radius: 5px;
+.nav-link {
+  color: #000000 !important; /* White text for better contrast */
 }
 
+.nav-link:hover {
+  background-color: #92aecc; /* Darker blue on hover */
+  border-radius: 20px;
+}
+
+
+/* Footer Styling */
+footer {
+  padding: 20px 0;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* General Form and Card Enhancements */
 .card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  background-color: #f8f9fa; /* Slightly off-white background */
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,.05);
 }
 
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+input[type="text"], input[type="password"], .form-control {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .card-container.card {
+    width: 100%; /* Full width on smaller screens */
+    padding: 20px;
+  }
+}
