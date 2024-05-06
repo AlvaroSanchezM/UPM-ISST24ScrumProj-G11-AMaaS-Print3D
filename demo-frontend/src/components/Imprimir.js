@@ -68,7 +68,7 @@ const Imprimir = () => {
                 <div key={order.id} className="card mb-3">
                     <div className="card-body">
                         <h5 className="card-title">Pedido Completado {index + 1}</h5>
-                        <Button variant="primary" onClick={() => handleShowModal(order)}>Más Info</Button>
+                        <Button variant="primary" onClick={() => handleShowModal(order)}>Más información</Button>
                     </div>
                 </div>
             ))}
