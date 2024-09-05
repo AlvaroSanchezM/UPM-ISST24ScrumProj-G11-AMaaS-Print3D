@@ -3,19 +3,21 @@ AMaaS – Marketplace de fabricación aditiva como servicio. Desarrollo de MVP c
 
 Universidad Politécnica de Madrid
 Asignatura: Ingeniería de Sistemas y Servicios Telemáticos (ISST)
-Trabajo en grupo
+Trabajo en grupo, Grupo 11
 
 Se ha utilizado metodología SCRUM para realizar este trabajo.
-Tutor: Samuel Yod
-Estudiantes: Juanjo Arlandis, Álvaro Sánchez, Irina Blaj, Sergio Jiménez, Silvia Rodríguez Hernández
+
+Autores:
+ - Tutor: Samuel Yod
+ - Estudiantes: Juanjo Arlandis, Álvaro Sánchez, Irina Blaj, Sergio Jiménez, Silvia Rodríguez Hernández
 
 Roles del equipo SCRUM:
-Samuel Yod  -  -  -  -  -  - Client
-Juanjo Arlandis-  -  -  -  - SCRUM Master + Software Developer
-Álvaro Sánchez -  -  -  -  - Product Owner + Software Developer
-Irina Blaj  -  -  -  -  -  - Software Developer
-Sergio Jiménez -  -  -  -  - Software Developer
-Silvia Rodríguez Hernández - Software Developer
+ - Samuel Yod  -  -  -  -  -  - Client
+ - Juanjo Arlandis-  -  -  -  - SCRUM Master + Software Developer
+ - Álvaro Sánchez -  -  -  -  - Product Owner + Software Developer
+ - Irina Blaj  -  -  -  -  -  - Software Developer
+ - Sergio Jiménez -  -  -  -  - Software Developer
+ - Silvia Rodríguez Hernández - Software Developer
 
 Caso de estudio: AMaaS, Marketplace de fabricación Aditiva como Servicio
 
