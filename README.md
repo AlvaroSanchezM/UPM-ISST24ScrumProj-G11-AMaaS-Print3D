@@ -5,19 +5,19 @@ Universidad Politécnica de Madrid
 Asignatura: Ingeniería de Sistemas y Servicios Telemáticos (ISST)
 Trabajo en grupo, Grupo 11
 
-Se ha utilizado metodología SCRUM para realizar este trabajo.
+Se ha utilizado metodología SCRUM para realizar este trabajo en 3 Sprints, de 4 semanas cada uno.
 
 Autores:
  - Tutor: Samuel Yod
  - Estudiantes: Juanjo Arlandis, Álvaro Sánchez, Irina Blaj, Sergio Jiménez, Silvia Rodríguez Hernández
 
 Roles del equipo SCRUM:
- - Samuel Yod  -  -  -  -  -  - Client
- - Juanjo Arlandis-  -  -  -  - SCRUM Master + Software Developer
- - Álvaro Sánchez -  -  -  -  - Product Owner + Software Developer
- - Irina Blaj  -  -  -  -  -  - Software Developer
- - Sergio Jiménez -  -  -  -  - Software Developer
- - Silvia Rodríguez Hernández - Software Developer
+ - Samuel Yod  -  -  -  -  -  - Client    -    -    -    -    -    - ys.martin@upm.es
+ - Juanjo Arlandis-  -  -  -  - SCRUM Master + Software Developer  - jj.arlandis@alumnos.upm.es
+ - Álvaro Sánchez -  -  -  -  - Product Owner + Software Developer - alvaro.sanchezm@alumnos.upm.es
+ - Irina Blaj  -  -  -  -  -  - Software Developer  -    -    -    - irina.blaj@alumnos.upm.es
+ - Sergio Jiménez -  -  -  -  - Software Developer  -    -    -    - sergio.jimenez.sanchez@upm.es
+ - Silvia Rodríguez Hernández - Software Developer  -    -    -    - silvia.rodriguezh@alumnos.upm.es
 
 Caso de estudio: AMaaS, Marketplace de fabricación Aditiva como Servicio
 
