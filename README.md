@@ -12,7 +12,7 @@ Autores:
  - Estudiantes: Juanjo Arlandis, Álvaro Sánchez, Irina Blaj, Sergio Jiménez, Silvia Rodríguez Hernández
 
 Roles del equipo SCRUM:
- - Samuel Yod . . . . . . . . . Client . . . . . . . . . . . . . . . ****************
+ - Samuel Yod  Client . . . . . . . . . . . . . . . ****************
  - Juanjo Arlandis. . . . . . . SCRUM Master + Software Developer. . jj.arlandis@alumnos.upm.es
  - Álvaro Sánchez . . . . . . . Product Owner + Software Developer . alvaro.sanchezm@alumnos.upm.es
  - Irina Blaj . . . . . . . . . Software Developer . . . . . . . . . irina.blaj@alumnos.upm.es
