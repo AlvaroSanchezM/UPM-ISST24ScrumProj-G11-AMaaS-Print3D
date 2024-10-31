@@ -12,12 +12,12 @@ Autores:
  - Estudiantes: Juanjo Arlandis, Álvaro Sánchez, Irina Blaj, Sergio Jiménez, Silvia Rodríguez Hernández
 
 Roles del equipo SCRUM:
-  - Samuel Yod . . . . . . . . . Client . . . . . . . . . . . . . . . ****************
-  - Juanjo Arlandis. . . . . . . SCRUM Master + Software Developer. . jj.arlandis@alumnos.upm.es
-  - Álvaro Sánchez . . . . . . . Product Owner + Software Developer . alvaro.sanchezm@alumnos.upm.es
-  - Irina Blaj . . . . . . . . . Software Developer . . . . . . . . . irina.blaj@alumnos.upm.es
-  - Sergio Jiménez . . . . . . . Software Developer . . . . . . . . . sergio.jimenez.sanchez@upm.es
-  - Silvia Rodríguez Hernández . Software Developer . . . . . . . . . silvia.rodriguezh@alumnos.upm.es
+  - Samuel Yod                  >Client . . . . . . . . . . . . . . .>****************
+  - Juanjo Arlandis. . . . . . .>SCRUM Master + Software Developer. .>jj.arlandis@alumnos.upm.es
+  - Álvaro Sánchez . . . . . . .>Product Owner + Software Developer .>alvaro.sanchezm@alumnos.upm.es
+  - Irina Blaj . . . . . . . . .>Software Developer . . . . . . . . .>irina.blaj@alumnos.upm.es
+  - Sergio Jiménez . . . . . . .>Software Developer . . . . . . . . .>sergio.jimenez.sanchez@upm.es
+  - Silvia Rodríguez Hernández .>Software Developer . . . . . . . . .>silvia.rodriguezh@alumnos.upm.es
 
 Caso de estudio: AMaaS, Marketplace de fabricación Aditiva como Servicio
 
